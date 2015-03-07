@@ -2,12 +2,9 @@
     <string name="app_name">Thrive</string>
 
     <string name="title_section1">Profile</string>
-    <string name="title_section2">Exercise Diary</string>
-    <string name="title_section3">Food Diary</string>
+    <string name="title_section2">Nutrition</string>
+    <string name="title_section3">Fitness</string>
     <string name="title_section4">Settings</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
 
