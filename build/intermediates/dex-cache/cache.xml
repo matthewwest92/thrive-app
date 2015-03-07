@@ -2,6 +2,27 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-59aecefc5425cb1116c1d6f35f6831c31f7f31df.jar" />
+    </item>
+    <item
+        jar="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\pre-dexed\debug\classes-2d1a002c71f8a6550e9f6fc3aee0a75d7d5e3b61.jar" />
+    </item>
+    <item
+        jar="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\pre-dexed\debug\classes-3c3bf23b18fc1c2271b4f6ca38722bf29eed21c6.jar" />
+    </item>
+    <item
         jar="C:\Users\matty_000\AndroidStudioProjects\Thrive\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
