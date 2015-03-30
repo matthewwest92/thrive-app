@@ -10,6 +10,9 @@
     </string-array>
 
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="title_section1">Profile</string>
     <string name="title_section2">Nutrition</string>
     <string name="title_section3">Fitness</string>
