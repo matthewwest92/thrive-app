@@ -1,24 +1,20 @@
 package com.thrive.westm10.thrive;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -35,6 +31,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -43,6 +40,8 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
     }
 
     @Override
@@ -53,7 +52,7 @@ public class MainActivity extends ActionBarActivity
 
         switch(position) {
             case 0:
-                objFragment = new ProfileFragment();
+                objFragment = new ProfileCollectionFragment();
                 mTitle = getString(R.string.title_section1);
                 break;
             case 1:
