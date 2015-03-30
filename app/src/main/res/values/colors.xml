@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="thrive_green" type="color">#006a34</item>
+    <item name="thrive_green" type="color">#3b6c2c</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="gray" type="color">#ccc</item>
 </resources>
