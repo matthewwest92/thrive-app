@@ -1,5 +1,6 @@
 package com.thrive.westm10.thrive;
 
+<<<<<<< HEAD
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -7,10 +8,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+=======
+import android.app.Activity;
+>>>>>>> origin/Nav-Drawer-Implementation
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+<<<<<<< HEAD
+=======
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+>>>>>>> origin/Nav-Drawer-Implementation
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,9 +36,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
+<<<<<<< HEAD
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
+=======
+ * Created by matty_000 on 30/03/2015.
+>>>>>>> origin/Nav-Drawer-Implementation
  */
 public class NavigationDrawerFragment extends Fragment {
 
@@ -105,7 +122,11 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
+<<<<<<< HEAD
                         getString(R.string.title_section4)
+=======
+                        getString(R.string.title_section4),
+>>>>>>> origin/Nav-Drawer-Implementation
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

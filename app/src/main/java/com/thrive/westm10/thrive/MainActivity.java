@@ -1,6 +1,13 @@
 package com.thrive.westm10.thrive;
 
 import android.app.Activity;
+<<<<<<< HEAD
+=======
+import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+>>>>>>> origin/Nav-Drawer-Implementation
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -8,15 +15,24 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.view.Gravity;
+=======
+import android.util.Log;
+>>>>>>> origin/Nav-Drawer-Implementation
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+=======
+import android.widget.AdapterView;
+import android.widget.ListView;
+>>>>>>> origin/Nav-Drawer-Implementation
 
 
 public class MainActivity extends ActionBarActivity
@@ -50,6 +66,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+<<<<<<< HEAD
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -68,6 +85,33 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section3);
                 break;
         }
+=======
+
+        Fragment objFragment = null;
+
+        switch(position) {
+            case 0:
+                objFragment = new ProfileFragment();
+                mTitle = getString(R.string.title_section1);
+                break;
+            case 1:
+                objFragment = new NutritionFragment();
+                mTitle = getString(R.string.title_section2);
+                break;
+            case 2:
+                objFragment = new FitnessFragment();
+                mTitle = getString(R.string.title_section3);
+                break;
+            case 3:
+                objFragment = new SettingsActivity();
+                mTitle = getString(R.string.title_section4);
+                break;
+        }
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, objFragment)
+                .commit();
+>>>>>>> origin/Nav-Drawer-Implementation
     }
 
     public void restoreActionBar() {
@@ -109,7 +153,11 @@ public class MainActivity extends ActionBarActivity
     /**
      * A placeholder fragment containing a simple view.
      */
+<<<<<<< HEAD
     public static class PlaceholderFragment extends Fragment {
+=======
+    public static class PlaceholderFragment extends android.support.v4.app.Fragment {
+>>>>>>> origin/Nav-Drawer-Implementation
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -138,12 +186,15 @@ public class MainActivity extends ActionBarActivity
             return rootView;
         }
 
+<<<<<<< HEAD
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+=======
+>>>>>>> origin/Nav-Drawer-Implementation
     }
 
 }
