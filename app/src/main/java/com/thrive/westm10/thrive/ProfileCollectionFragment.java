@@ -14,7 +14,7 @@ import android.widget.TextView;
 /**
  * Created by Matthew West on 30/03/2015.
  */
-public class ProfileCollectionFragment extends Fragment {
+public class ProfileCollectionFragment extends FragmentActivity {
     // When requested, this adapter returns a DemoObjectFragment,
     // representing an object in the collection.
     DemoCollectionPagerAdapter mDemoCollectionPagerAdapter;

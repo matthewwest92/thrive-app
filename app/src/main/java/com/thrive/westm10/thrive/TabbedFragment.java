@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class TabbedFragment extends Fragment {
@@ -96,6 +97,8 @@ public class TabbedFragment extends Fragment {
          * The fragment argument representing the section number for this
          * fragment.
          */
+
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         /**
@@ -116,8 +119,12 @@ public class TabbedFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tabbed, container, false);
+            View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
+            TextView tv = (TextView) rootView.findViewById(R.id.txtLabel);
+            tv.setText(tv+" yay");
+
             return rootView;
+
         }
     }
 
