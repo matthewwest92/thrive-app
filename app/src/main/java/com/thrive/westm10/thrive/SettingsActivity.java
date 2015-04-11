@@ -2,6 +2,7 @@ package com.thrive.westm10.thrive;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,16 @@ import android.view.ViewGroup;
 /**
  * Created by Matthew West on 30/03/2015.
  */
-public class SettingsActivity extends Fragment {
+public class SettingsActivity extends PreferenceFragment {
     public SettingsActivity() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        View rootView = inflater.inflate(R.layout.settings_activity, container, false);
-
-        return rootView;
+        // Load the preferences from an XML resource
+        addPreferencesFromResource(R.xml.preferences);
     }
+
 }

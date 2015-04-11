@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="thrive_green" type="color">#3b6c2c</item>
-    <item name="white" type="color">#FFFFFF</item>
+    <item name="nav_drawer_higlight" type="color">#7be05c</item>
+    <item name="positive_val" type="color">#3b6c2c</item>
+    <item name="negativ_val" type="color">#3b6c2c</item>
+    <item name="text_col" type="color">#6d6d6d</item>
+    <item name="info_background" type="color">#d4d4d4</item>
+
+    <item name="white" type="color">#FFFFFF</item>000000
+    <item name="black" type="color">#000000</item>
     <item name="gray" type="color">#ccc</item>
 </resources>

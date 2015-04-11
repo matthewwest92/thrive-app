@@ -4,6 +4,46 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string-array name="navigation_drawer_items_array">
+        <item>Profile</item>
+        <item>Nutrition</item>
+        <item>Fitness</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string-array name="achievement_list_array">
+        <item>Achievement 1</item>
+        <item>Achievement 2</item>
+        <item>Achievement 3</item>
+        <item>Achievement 4</item>
+        <item>Achievement 5</item>
+        <item>Achievement 6</item>
+        <item>Achievement 7</item>
+        <item>Achievement 8</item>
+    </string-array>
+
+    <string-array name="achievement_list__descriptions_array">
+        <item>Achievement 1 description</item>
+        <item>Achievement 2 description</item>
+        <item>Achievement 3 description</item>
+        <item>Achievement 4 description</item>
+        <item>Achievement 5 description</item>
+        <item>Achievement 6 description</item>
+        <item>Achievement 7 description</item>
+        <item>Achievement 8 description</item>
+    </string-array>
+
+    <string-array name="exercise_list">
+        <item>Jogging 1KM</item>
+        <item>Jogging 2KM</item>
+        <item>Jogging 3KM</item>
+        <item>Jogging 4KM</item>
+        <item>Jogging 5KM</item>
+        <item>Jogging 6KM</item>
+        <item>Jogging 7KM</item>
+        <item>Jogging 8KM</item>
+    </string-array>
+
     <string name="title_section1">Profile</string>
     <string name="title_section2">Nutrition</string>
     <string name="title_section3">Fitness</string>
@@ -13,10 +53,78 @@
     <string name="profile_section2">Goals</string>
     <string name="profile_section3">Achievements</string>
 
+    <string name="profile_save">Done  </string>
+
+
+    <string name="overview_first_welcome">Hello there</string>
+    <string name="overview_welcome">Welcome back</string>
+    <string name="calories_left_text">Net calories for today</string>
+    <string name="calories_left_value">1300</string>
+    <string name="placeholder_cals">0000</string>
+    <string name="user_name">Matthew West</string>
+    <string name="food_cals_text">Food</string>
+    <string name="exercise_cals_text">Exercise</string>
+    <string name="goal_cals_text">Goal</string>
+
+    <string name="fitness_empty">No fitness activities completed today</string>
+
+
+    <string name="nutrition_empty">No fitness activities completed today</string>
+
+
+
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_tabbed">TabbedActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="settings_title_1">Push Notifications</string>
+    <string name="settings_title_2">Notification Frequency</string>
+    <string name="settings_title_3">Disclaimer</string>
+    <string name="settings_message_3">The purpose of this research project is to assess to what extent can mobile applications promote and motivate continued fitness and wellbeing amongst 18-25 year olds in the UK. This is a research project being conducted by Matthew West at Coventry University. You are invited to participate in this research project because you are a student at Coventry University and fall within the target age group.
+Your participation in this research study is voluntary. You may choose not to participate. If you decide to participate in this research survey, you may withdraw at any time. If you decide not to participate in this study or if you withdraw from participating at any time, you will not be penalized.
+The procedure involves filling in a survey that will take approximately 2 minutes. Your responses will be confidential and we do not collect identifying information such as your name or email address. The survey questions will be about your current lifestyle and fitness regime and will be used solely to further this study.
+Your information will remain confidential. All data is stored in a password protected electronic format for the online surveys and the paper surveys will remain in a secure location. To help protect your confidentiality, the surveys will not contain information that will personally identify you. The results of this study will be used for scholarly purposes only.
+Survey data will be destroyed 6 months after the publication of results.</string>
+    <string name="settings_title_4">Terms of Service</string>
+    <string name="settings_message_4">The purpose of this research project is to assess to what extent can mobile applications promote and motivate continued fitness and wellbeing amongst 18-25 year olds in the UK. This is a research project being conducted by Matthew West at Coventry University. You are invited to participate in this research project because you are a student at Coventry University and fall within the target age group.
+Your participation in this research study is voluntary. You may choose not to participate. If you decide to participate in this research survey, you may withdraw at any time. If you decide not to participate in this study or if you withdraw from participating at any time, you will not be penalized.
+The procedure involves filling in a survey that will take approximately 2 minutes. Your responses will be confidential and we do not collect identifying information such as your name or email address. The survey questions will be about your current lifestyle and fitness regime and will be used solely to further this study.
+Your information will remain confidential. All data is stored in a password protected electronic format for the online surveys and the paper surveys will remain in a secure location. To help protect your confidentiality, the surveys will not contain information that will personally identify you. The results of this study will be used for scholarly purposes only.
+Survey data will be destroyed 6 months after the publication of results.</string>
+    <string name="settings_title_5">Privacy Policy</string>
+    <string name="settings_message_5">The purpose of this research project is to assess to what extent can mobile applications promote and motivate continued fitness and wellbeing amongst 18-25 year olds in the UK. This is a research project being conducted by Matthew West at Coventry University. You are invited to participate in this research project because you are a student at Coventry University and fall within the target age group.
+Your participation in this research study is voluntary. You may choose not to participate. If you decide to participate in this research survey, you may withdraw at any time. If you decide not to participate in this study or if you withdraw from participating at any time, you will not be penalized.
+The procedure involves filling in a survey that will take approximately 2 minutes. Your responses will be confidential and we do not collect identifying information such as your name or email address. The survey questions will be about your current lifestyle and fitness regime and will be used solely to further this study.
+Your information will remain confidential. All data is stored in a password protected electronic format for the online surveys and the paper surveys will remain in a secure location. To help protect your confidentiality, the surveys will not contain information that will personally identify you. The results of this study will be used for scholarly purposes only.
+Survey data will be destroyed 6 months after the publication of results.</string>
+    <string name="settings_title_6">Application Version</string>
+    <string name="settings_summary_6">0.5</string>
+    <string name="settings_title_7">Developer</string>
+    <string name="settings_summary_7">Matthew West</string>
+    <string name="settings_title_8">Open Source Libraries</string>
+    <string name="settings_message_8">&lt;a href="https://github.com/kolavar/android-support-v4-preferencefragment">Android Support Preference Fragment&lt;/a></string>
+
+    <string name="settings_positive_button">Ok</string>
+
+    <string name="settings_group_title_1">Application Settings</string>
+    <string name="settings_group_title_2">Information</string>
+    <string name="settings_group_title_3">Application Information</string>
+
+    <string name="settings_2_dialog_title">Frequency</string>
+    <string name="settings_2_default_Value">Every Day</string>
+    <string-array name="settings_2_entries">
+        <item>Daily</item>
+        <item>Every three days</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+    <string-array name="settings_2_values">
+        <item>1</item>
+        <item>3</item>
+        <item>7</item>
+        <item>28</item>
+    </string-array>
+
+
 </resources>

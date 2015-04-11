@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jar="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\exploded-aar\com.android.support\android-support-v4-preferencefragment\1.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-37ecfdf86c9bc099e2456005bf6c479fc7a7a75c.jar" />
-    </item>
-    <item
-        jar="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\pre-dexed\debug\classes-44db9824f0e362fbe68f7db5423c47a0e0cdf952.jar" />
-    </item>
-    <item
-        jar="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\pre-dexed\debug\classes-4537b7343ad2e45128338005bedfd86d6c84f67b.jar" />
-    </item>
-    <item
-        jar="C:\Users\matty_000\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\matty_000\University\Dissertation\thrive-app\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-20b8c958070a2285a060ac3fe3e00a34b13e2cbc.jar" />
+        sha1="a2c44dfd6bb2a22b41d0e2bce49f8d495b69d048">
+        <dex dex="C:\Users\matty_000\University\303COM Individual Project\App\thrive-app\app\build\intermediates\pre-dexed\debug\classes-67bcec8a45b471fb3d31c543f1e8740d561ff010.jar" />
     </item>
 
 </items>

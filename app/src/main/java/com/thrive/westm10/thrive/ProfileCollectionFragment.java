@@ -3,6 +3,11 @@ package com.thrive.westm10.thrive;
 import java.util.Locale;
 
 import android.app.ActionBar;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,11 +16,17 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -39,15 +50,12 @@ public class ProfileCollectionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         return inflater.inflate(R.layout.activity_tabbed, null);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -74,8 +82,11 @@ public class ProfileCollectionFragment extends Fragment {
             if(position == 1) {
                 return GoalsFragment.newInstance(position + 1);
             }
+            if(position == 2) {
+                return AchievementFragment.newInstance(position + 1);
+            }
             else {
-                return PlaceholderFragment.newInstance(position + 1);
+                return OverviewFragment.newInstance(position + 1);
             }
 
         }
@@ -104,7 +115,7 @@ public class ProfileCollectionFragment extends Fragment {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class OverviewFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -116,23 +127,60 @@ public class ProfileCollectionFragment extends Fragment {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static OverviewFragment newInstance(int sectionNumber) {
+            OverviewFragment fragment = new OverviewFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public PlaceholderFragment() {
+        public OverviewFragment() {
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
-            TextView tv = (TextView) rootView.findViewById(R.id.txtLabel);
-            tv.setText(tv.getText() + " PROFILE!");
+            TextView nameTV = (TextView) rootView.findViewById(R.id.name);
+            nameTV.setText(getResources().getString(R.string.user_name));
+
+
+            TextView netCalTextTV = (TextView) rootView.findViewById(R.id.netCalText);
+            netCalTextTV.setText(getResources().getString(R.string.calories_left_text));
+            TextView netCalValTV = (TextView) rootView.findViewById(R.id.netCalVal);
+            netCalValTV.setText(getResources().getString(R.string.calories_left_value));
+
+            TextView foodCaltxtTV = (TextView) rootView.findViewById(R.id.foodCaltxt);
+            TextView exerciseCaltxtTV = (TextView) rootView.findViewById(R.id.exerciseCaltxt);
+            TextView goalCaltxtTV = (TextView) rootView.findViewById(R.id.goalCaltxt);
+            foodCaltxtTV.setText(R.string.food_cals_text);
+            exerciseCaltxtTV.setText(R.string.exercise_cals_text);
+            goalCaltxtTV.setText(R.string.goal_cals_text);
+
+
+            TextView foodCalValTV = (TextView) rootView.findViewById(R.id.foodCalval);
+            foodCalValTV.setText(getResources().getString(R.string.placeholder_cals));
+            TextView exerciseCalValTV = (TextView) rootView.findViewById(R.id.exerciseCalval);
+            exerciseCalValTV.setText(getResources().getString(R.string.placeholder_cals));
+            TextView goalCalValTV = (TextView) rootView.findViewById(R.id.goalCalval);
+            goalCalValTV.setText(getResources().getString(R.string.placeholder_cals));
+
+            ImageView avatarIV = (ImageView) rootView.findViewById(R.id.avatar);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.unknown);
+            RoundImage roundedImage = new RoundImage(bm);
+            avatarIV.setImageDrawable(roundedImage);
+
+            avatarIV.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(getActivity(), ProfileSetupActivity.class);
+                    startActivity(intent);
+
+                }
+
+            });
 
             return rootView;
 
@@ -144,6 +192,7 @@ public class ProfileCollectionFragment extends Fragment {
          * The fragment argument representing the section number for this
          * fragment.
          */
+
 
         private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -162,12 +211,60 @@ public class ProfileCollectionFragment extends Fragment {
         public GoalsFragment() {
         }
 
+
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.nutrition_fragment, container, false);
-            TextView tv = (TextView) rootView.findViewById(R.id.txtLabel);
-            tv.setText(tv.getText() + " GOAL!");
+            View rootView = inflater.inflate(R.layout.goal_fragment, container, false);
+
+
+
+            return rootView;
+
+        }
+    }
+
+    public static class AchievementFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+
+        private ListView mListView;
+        private String[] mItemTitles;
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+
+        public static AchievementFragment newInstance(int sectionNumber) {
+            AchievementFragment fragment = new AchievementFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public AchievementFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.achievement_fragment, container, false);
+
+            mItemTitles= getResources().getStringArray(R.array.achievement_list_array);
+            mListView = (ListView) rootView.findViewById(R.id.achievement_list);
+            DatabaseAdapter db = new DatabaseAdapter(getActivity());
+            db.unlockAchievement("You''re Set!");
+
+            AchievementAdapter adapter = new AchievementAdapter(getActivity(), R.layout.achievement_list_row, db.getAchievementsData());
+
+            mListView.setAdapter(adapter);
 
             return rootView;
 

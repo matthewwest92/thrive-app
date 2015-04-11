@@ -1,22 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtLabel"
-        android:layout_width="wrap_content"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Profile View"
-        android:textSize="16dp" />
+        android:layout_weight="1"
+        android:background="@color/thrive_green" >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/test_icon" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/avatar"
+            android:src="@drawable/unknown"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:layout_above="@+id/name" />
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            android:id="@+id/name"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/netCalVal"
+                android:textSize="48sp"
+                android:layout_below="@+id/netCalText"
+                android:layout_alignLeft="@+id/netCalText"
+                android:layout_alignStart="@+id/netCalText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/netCalText"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_round_corners_bg"
+                android:layout_below="@+id/netCalVal"
+                android:layout_alignLeft="@+id/netCalVal"
+                android:layout_alignStart="@+id/netCalVal"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:id="@+id/calValBox">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="000"
+                    android:textSize="36sp"
+                    android:gravity="center"
+                    android:id="@+id/foodCalval"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="000"
+                    android:textSize="36sp"
+                    android:gravity="center"
+                    android:id="@+id/exerciseCalval"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/foodCalval"
+                    android:layout_toEndOf="@+id/foodCalval"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="000"
+                    android:textSize="36sp"
+                    android:gravity="center"
+                    android:id="@+id/goalCalval"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/exerciseCalval"
+                    android:layout_toEndOf="@+id/exerciseCalval"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="000"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:id="@+id/foodCaltxt"
+                    android:layout_below="@+id/foodCalval"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="000"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:id="@+id/exerciseCaltxt"
+
+                    android:layout_toRightOf="@+id/foodCaltxt"
+                    android:layout_below="@+id/exerciseCalval"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="000"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:id="@+id/goalCaltxt"
+                    android:layout_toRightOf="@+id/exerciseCaltxt"
+                    android:layout_below="@+id/goalCalval"
+                    android:textAlignment="center" />
+
+                </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
