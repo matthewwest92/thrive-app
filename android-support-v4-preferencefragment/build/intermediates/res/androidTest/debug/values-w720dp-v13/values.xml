@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/C:/Users/matty_000/University/303COM%20Individual%20Project/App/thrive-app/android-support-v4-preferencefragment/build/intermediates/bundles/debug/res/values-w720dp-v13/values.xml -->
+    <eat-comment/>
+    <dimen name="preference_fragment_padding_side">32dp</dimen>
+</resources>
