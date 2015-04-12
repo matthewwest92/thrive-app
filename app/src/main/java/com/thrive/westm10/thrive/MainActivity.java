@@ -35,6 +35,9 @@ public class MainActivity extends ActionBarActivity
                     R.drawable.unknown);
             saveToInternalStorage(icon);
             prefs.edit().putBoolean("firstrun", false).commit();
+            db.insertAchievementsData();
+            db.insertExerciseData();
+
         }
     }
 
@@ -64,7 +67,6 @@ public class MainActivity extends ActionBarActivity
 
         // Set up the database
         db = new DatabaseAdapter(this);
-        db.insertAchievementsData();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(

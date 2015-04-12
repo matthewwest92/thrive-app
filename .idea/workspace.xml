@@ -59,17 +59,29 @@
       <file leaf-file-name="ProfileSetupActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileSetupActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3876">
-              <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2567" max-vertical-offset="4046">
+              <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="8" />
               <folding>
-                <element signature="e#2425#2908#0" expanded="true" />
-                <element signature="e#2896#2897#0" expanded="true" />
-                <element signature="e#3349#3608#0" expanded="true" />
-                <element signature="e#3596#3597#0" expanded="true" />
-                <element signature="e#3656#4063#0" expanded="true" />
-                <element signature="e#4051#4052#0" expanded="true" />
-                <element signature="e#5619#5834#0" expanded="true" />
-                <element signature="e#5823#5824#0" expanded="true" />
+                <element signature="e#2594#3077#0" expanded="true" />
+                <element signature="e#3065#3066#0" expanded="true" />
+                <element signature="e#3518#3777#0" expanded="true" />
+                <element signature="e#3765#3766#0" expanded="true" />
+                <element signature="e#3825#4232#0" expanded="true" />
+                <element signature="e#4220#4221#0" expanded="true" />
+                <element signature="e#5925#6140#0" expanded="true" />
+                <element signature="e#6129#6130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateConversion.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DateConversion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="353" max-vertical-offset="1972">
+              <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,8 +90,8 @@
       <file leaf-file-name="ProfileCollectionFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileCollectionFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="770" max-vertical-offset="4556">
-              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3753" max-vertical-offset="4556">
+              <caret line="292" column="27" selection-start-line="292" selection-start-column="27" selection-end-line="292" selection-end-column="27" />
               <folding>
                 <element signature="e#3533#3569#0" expanded="true" />
                 <element signature="e#3637#3673#0" expanded="true" />
@@ -111,8 +123,8 @@
       <file leaf-file-name="DatabaseAdapter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DatabaseAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3443038" vertical-offset="51" max-vertical-offset="4352">
-              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+            <state vertical-scroll-proportion="-1.3240507" vertical-offset="2287" max-vertical-offset="6120">
+              <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -138,29 +150,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile_setup_layout.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/profile_setup_layout.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="3026">
-              <caret line="85" column="36" selection-start-line="85" selection-start-column="36" selection-end-line="85" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="387" max-vertical-offset="2584">
-              <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2618">
+              <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
               <folding>
-                <element signature="e#2557#2591#0" expanded="true" />
-                <element signature="e#2716#2750#0" expanded="true" />
-                <element signature="e#2873#2907#0" expanded="true" />
-                <element signature="e#3031#3065#0" expanded="true" />
+                <element signature="e#2599#2633#0" expanded="true" />
+                <element signature="e#2758#2792#0" expanded="true" />
+                <element signature="e#2915#2949#0" expanded="true" />
+                <element signature="e#3073#3107#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2003,8 +2002,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DrawerAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/drawer_background.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/drawer_item_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/listview_item_row.xml" />
@@ -2049,11 +2046,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/profile_setup_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/GenderDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileCollectionFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileObject.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/JulianToDate.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DateConversion.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileSetupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DatabaseAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2892,10 +2891,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DateConversion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="353" max-vertical-offset="1972">
+          <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileSetupActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2567" max-vertical-offset="4046">
+          <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="8" />
+          <folding>
+            <element signature="e#2594#3077#0" expanded="true" />
+            <element signature="e#3065#3066#0" expanded="true" />
+            <element signature="e#3518#3777#0" expanded="true" />
+            <element signature="e#3765#3766#0" expanded="true" />
+            <element signature="e#3825#4232#0" expanded="true" />
+            <element signature="e#4220#4221#0" expanded="true" />
+            <element signature="e#5925#6140#0" expanded="true" />
+            <element signature="e#6129#6130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileCollectionFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="770" max-vertical-offset="4556">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3753" max-vertical-offset="4556">
+          <caret line="292" column="27" selection-start-line="292" selection-start-column="27" selection-end-line="292" selection-end-column="27" />
           <folding>
             <element signature="e#3533#3569#0" expanded="true" />
             <element signature="e#3637#3673#0" expanded="true" />
@@ -2915,46 +2949,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="387" max-vertical-offset="2584">
-          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2618">
+          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
           <folding>
-            <element signature="e#2557#2591#0" expanded="true" />
-            <element signature="e#2716#2750#0" expanded="true" />
-            <element signature="e#2873#2907#0" expanded="true" />
-            <element signature="e#3031#3065#0" expanded="true" />
+            <element signature="e#2599#2633#0" expanded="true" />
+            <element signature="e#2758#2792#0" expanded="true" />
+            <element signature="e#2915#2949#0" expanded="true" />
+            <element signature="e#3073#3107#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileSetupActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3876">
-          <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
-          <folding>
-            <element signature="e#2425#2908#0" expanded="true" />
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#3349#3608#0" expanded="true" />
-            <element signature="e#3596#3597#0" expanded="true" />
-            <element signature="e#3656#4063#0" expanded="true" />
-            <element signature="e#4051#4052#0" expanded="true" />
-            <element signature="e#5619#5834#0" expanded="true" />
-            <element signature="e#5823#5824#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/ProfileObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thrive/westm10/thrive/DatabaseAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3443038" vertical-offset="51" max-vertical-offset="4352">
-          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        <state vertical-scroll-proportion="-1.3240507" vertical-offset="2287" max-vertical-offset="6120">
+          <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
           <folding />
         </state>
       </provider>

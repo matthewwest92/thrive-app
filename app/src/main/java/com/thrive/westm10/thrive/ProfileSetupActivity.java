@@ -39,11 +39,16 @@ public class ProfileSetupActivity extends ActionBarActivity {
 
     private static final int SELECT_PHOTO = 100;
     Calendar myCalendar = Calendar.getInstance();
+    EditText firstEdit;
+    EditText surEdit;
+    EditText heightEdit;
+    EditText weightEdit;
     EditText datePicker;
     EditText genderPicker;
     String choice = "Male";
     DatabaseAdapter db;
     ProfileObject tempProfile;
+    DateConversion converter;
 
 
     @Override
@@ -53,8 +58,10 @@ public class ProfileSetupActivity extends ActionBarActivity {
         setContentView(R.layout.profile_setup_layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         db = new DatabaseAdapter(this);
         tempProfile = db.getProfile();
+        converter = new DateConversion();
 
 
 
@@ -114,10 +121,10 @@ public class ProfileSetupActivity extends ActionBarActivity {
             }
 
         });
-        EditText firstEdit = (EditText) this.findViewById(R.id.firstNameEdit);
-        EditText surEdit = (EditText) this.findViewById(R.id.surnameEdit);
-        EditText heightEdit = (EditText) this.findViewById(R.id.heightEdit);
-        EditText weightEdit = (EditText) this.findViewById(R.id.weightEdit);
+        firstEdit = (EditText) this.findViewById(R.id.firstNameEdit);
+        surEdit = (EditText) this.findViewById(R.id.surnameEdit);
+        heightEdit = (EditText) this.findViewById(R.id.heightEdit);
+        weightEdit = (EditText) this.findViewById(R.id.weightEdit);
 
         firstEdit.setText(tempProfile.firstName);
         surEdit.setText(tempProfile.surname);
@@ -129,7 +136,9 @@ public class ProfileSetupActivity extends ActionBarActivity {
             weightEdit.setText(String.valueOf(tempProfile.weight));
         }
         if(tempProfile.dob != 0.0) {
-            datePicker.setText(String.valueOf(tempProfile.dob));
+            String myFormat = "dd/MM/yy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+            datePicker.setText(sdf.format(converter.julianToDate(tempProfile.dob)));
         }
 
 
@@ -138,9 +147,8 @@ public class ProfileSetupActivity extends ActionBarActivity {
     }
     private void updateLabel() {
 
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-
         datePicker.setText(sdf.format(myCalendar.getTime()));
     }
 
@@ -200,6 +208,8 @@ public class ProfileSetupActivity extends ActionBarActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_done:
+                ProfileObject profile = new ProfileObject(firstEdit.getText().toString(),surEdit.getText().toString(),Float.parseFloat(heightEdit.getText().toString()),Float.parseFloat(weightEdit.getText().toString()),genderPicker.getText().toString(), (float) converter.dateToJulian(myCalendar.getTime()));
+                db.saveProfile(profile);
                 super.onBackPressed();
                 return true;
             case android.R.id.home:
