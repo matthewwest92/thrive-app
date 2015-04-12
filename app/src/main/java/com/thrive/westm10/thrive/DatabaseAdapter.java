@@ -19,6 +19,40 @@ public class DatabaseAdapter  {
         helper = new DatabaseHelper(context);
     }
 
+    public void saveProfile(ProfileObject profile) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseHelper.PROFILE_FIRST_NAME, DatabaseHelper.PROFILE_SURNAME, DatabaseHelper.PROFILE_HEIGHT, DatabaseHelper.PROFILE_WEIGHT, DatabaseHelper.PROFILE_GENDER, DatabaseHelper.PROFILE_DOB};
+        Cursor cursor=db.query(DatabaseHelper.PROFILE_TABLE_NAME, columns, null, null, null, null, null);
+        if(cursor.moveToNext()) {   //profile exists
+
+        } else {    //profile doesn't exist
+
+        }
+    }
+
+    public ProfileObject getProfile() {
+        ProfileObject profile;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseHelper.PROFILE_FIRST_NAME, DatabaseHelper.PROFILE_SURNAME, DatabaseHelper.PROFILE_HEIGHT, DatabaseHelper.PROFILE_WEIGHT, DatabaseHelper.PROFILE_GENDER, DatabaseHelper.PROFILE_DOB};
+        Cursor cursor=db.query(DatabaseHelper.PROFILE_TABLE_NAME, columns, null, null, null, null, null);
+        if(cursor.moveToNext()) {
+            int firstIndex = cursor.getColumnIndex(DatabaseHelper.PROFILE_FIRST_NAME);
+            int surIndex = cursor.getColumnIndex(DatabaseHelper.PROFILE_SURNAME);
+            int heightIndex = cursor.getColumnIndex(DatabaseHelper.PROFILE_HEIGHT);
+            int weightIndex = cursor.getColumnIndex(DatabaseHelper.PROFILE_WEIGHT);
+            int genderIndex = cursor.getColumnIndex(DatabaseHelper.PROFILE_GENDER);
+            int dobIndex = cursor.getColumnIndex(DatabaseHelper.PROFILE_DOB);
+            profile = new ProfileObject(cursor.getString(firstIndex),cursor.getString(surIndex),cursor.getFloat(heightIndex),cursor.getFloat(weightIndex), cursor.getString(genderIndex),cursor.getFloat(dobIndex));
+
+        } else {
+            profile = new ProfileObject("","", 0 ,0, "",0);
+        }
+
+        return profile;
+
+
+    }
+
     public long insertAchievement() {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

@@ -53,8 +53,11 @@
     <string name="profile_section2">Goals</string>
     <string name="profile_section3">Achievements</string>
 
-    <string name="profile_save">Done  </string>
-
+    <string name="profile_save">Done</string>
+    <string-array name="gender_options">
+            <item>Male</item>
+            <item>Female</item>
+    </string-array>
 
     <string name="overview_first_welcome">Hello there</string>
     <string name="overview_welcome">Welcome back</string>

@@ -6,14 +6,14 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
         android:background="@color/thrive_green" >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/avatar"
+            android:id="@+id/userAvatar"
             android:src="@drawable/unknown"
             android:adjustViewBounds="true"
             android:paddingTop="32dp"
@@ -89,6 +89,85 @@
                 android:layout_below="@+id/genderTitle"
                 android:layout_marginTop="32dp" />
 
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/firstNameEdit"
+                android:layout_alignTop="@+id/firstNameTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:editable="true"
+                android:maxLines="1"
+                android:minWidth="150dp"
+                android:singleLine="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/surnameEdit"
+                android:layout_alignTop="@+id/surnameTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:editable="true"
+                android:maxLines="1"
+                android:minWidth="150dp"
+                android:singleLine="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/heightEdit"
+                android:layout_alignTop="@+id/heightTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:editable="true"
+                android:maxLines="1"
+                android:minWidth="150dp"
+                android:singleLine="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/weightEdit"
+                android:layout_alignTop="@+id/weightTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:editable="true"
+                android:maxLines="1"
+                android:minWidth="150dp"
+                android:singleLine="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/genderEdit"
+                android:layout_alignTop="@+id/genderTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:editable="true"
+                android:maxLines="1"
+                android:minWidth="150dp"
+                android:singleLine="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dobEdit"
+                android:layout_alignTop="@+id/dobTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:editable="true"
+                android:maxLines="1"
+                android:minWidth="150dp"
+                android:singleLine="true" />
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

@@ -4,7 +4,6 @@ package com.thrive.westm10.thrive;
  * Created by Matthew West on 30/03/2015.
  */
 public class ProfileObject {
-    public int photo;
     public String firstName;
     public String surname;
     public float height;
@@ -13,8 +12,7 @@ public class ProfileObject {
     public float dob;
 
     // Constructor.
-    public ProfileObject(int photo, String firstName, String surname, float height, float weight, String gender, float dob) {
-        this.photo = photo;
+    public ProfileObject(String firstName, String surname, float height, float weight, String gender, float dob) {
         this.firstName = firstName;
         this.surname = surname;
         this.height = height;

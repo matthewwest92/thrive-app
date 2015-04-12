@@ -1,9 +1,13 @@
 package com.thrive.westm10.thrive;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Locale;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -127,6 +131,8 @@ public class ProfileCollectionFragment extends Fragment {
          * Returns a new instance of this fragment for the given section
          * number.
          */
+
+        ImageView avatarIV;
         public static OverviewFragment newInstance(int sectionNumber) {
             OverviewFragment fragment = new OverviewFragment();
             Bundle args = new Bundle();
@@ -166,10 +172,14 @@ public class ProfileCollectionFragment extends Fragment {
             TextView goalCalValTV = (TextView) rootView.findViewById(R.id.goalCalval);
             goalCalValTV.setText(getResources().getString(R.string.placeholder_cals));
 
-            ImageView avatarIV = (ImageView) rootView.findViewById(R.id.avatar);
+            avatarIV = (ImageView) rootView.findViewById(R.id.avatar);
             Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.unknown);
             RoundImage roundedImage = new RoundImage(bm);
             avatarIV.setImageDrawable(roundedImage);
+
+            ContextWrapper cw = new ContextWrapper(getActivity());
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            loadImageFromStorage(directory.getAbsolutePath());
 
             avatarIV.setOnClickListener(new View.OnClickListener()
             {
@@ -183,6 +193,22 @@ public class ProfileCollectionFragment extends Fragment {
             });
 
             return rootView;
+
+        }
+
+        private void loadImageFromStorage(String path)
+        {
+
+            try {
+                File f=new File(path, "profile.jpg");
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                RoundImage roundedImage = new RoundImage(b);
+                avatarIV.setImageDrawable(roundedImage);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
 
         }
     }
