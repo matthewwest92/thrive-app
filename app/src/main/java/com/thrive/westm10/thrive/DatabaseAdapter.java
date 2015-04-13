@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.style.TtsSpan;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -35,11 +36,34 @@ public class DatabaseAdapter  {
         contentValues.put(DatabaseHelper.PROFILE_DOB, profile.dob);
 
         if(cursor.moveToNext()) {   //profile exists
-            db.update(DatabaseHelper.PROFILE_TABLE_NAME, contentValues, DatabaseHelper.PROFILE_FIRST_NAME+" ='"+profile.firstName+"'",null);
+            db.update(DatabaseHelper.PROFILE_TABLE_NAME, contentValues, DatabaseHelper.PROFILE_UID+" ='1'",null);
         } else {    //profile doesn't exist
             db.insert(DatabaseHelper.PROFILE_TABLE_NAME, null, contentValues);
         }
     }
+
+    public void saveGoal(GoalObject goal) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseHelper.GOAL_START_WEIGHT, DatabaseHelper.GOAL_DURATION, DatabaseHelper.GOAL_TYPE, DatabaseHelper.GOAL_START, DatabaseHelper.GOAL_END, DatabaseHelper.GOAL_SIZE, DatabaseHelper.GOAL_TARGET_CALS};
+        Cursor cursor=db.query(DatabaseHelper.GOAL_TABLE_NAME, columns, null, null, null, null, null);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.GOAL_START_WEIGHT, goal.startWeight);
+        contentValues.put(DatabaseHelper.GOAL_DURATION, goal.duration);
+        contentValues.put(DatabaseHelper.GOAL_TYPE, goal.type);
+        contentValues.put(DatabaseHelper.GOAL_START, goal.startDate);
+        contentValues.put(DatabaseHelper.GOAL_END, goal.endDate);
+        contentValues.put(DatabaseHelper.GOAL_SIZE, goal.rate);
+        contentValues.put(DatabaseHelper.GOAL_TARGET_CALS, goal.targetCals);
+
+        if(cursor.moveToNext()) {   //profile exists
+            db.update(DatabaseHelper.GOAL_TABLE_NAME, contentValues, DatabaseHelper.GOAL_UID+" ='1'",null);
+        } else {    //profile doesn't exist
+            db.insert(DatabaseHelper.GOAL_TABLE_NAME, null, contentValues);
+        }
+    }
+
+
 
     public void storeExercise(String name, float calories, float time) {
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -324,7 +348,7 @@ public class DatabaseAdapter  {
                 e.printStackTrace();
             }
             try{
-                db.execSQL("CREATE TABLE "+GOAL_TABLE_NAME+"("+GOAL_UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+GOAL_START_WEIGHT+" REAL, "+GOAL_DURATION+" INTEGER, "+GOAL_TYPE+" VARCHAR(255), "+GOAL_START+" REAL, "+GOAL_END+" REAL, "+GOAL_SIZE+" REAL);");
+                db.execSQL("CREATE TABLE "+GOAL_TABLE_NAME+"("+GOAL_UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+GOAL_START_WEIGHT+" REAL, "+GOAL_DURATION+" INTEGER, "+GOAL_TYPE+" VARCHAR(255), "+GOAL_START+" REAL, "+GOAL_END+" REAL, "+GOAL_TARGET_CALS+" REAL, "+GOAL_SIZE+" REAL);");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -400,6 +424,7 @@ public class DatabaseAdapter  {
         private static final String GOAL_START = "start";
         private static final String GOAL_END = "end";
         private static final String GOAL_SIZE = "size";
+        private static final String GOAL_TARGET_CALS = "target_cals";
 
         private static final String NUTRITION_UID = "_id";
         private static final String NUTRITION_FOOD_NAME = "name";

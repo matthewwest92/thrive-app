@@ -126,6 +126,8 @@ public class ProfileCollectionFragment extends Fragment {
          */
 
         private static final String ARG_SECTION_NUMBER = "section_number";
+        DatabaseAdapter db;
+        ProfileObject profile;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -151,6 +153,13 @@ public class ProfileCollectionFragment extends Fragment {
             TextView nameTV = (TextView) rootView.findViewById(R.id.name);
             nameTV.setText(getResources().getString(R.string.user_name));
 
+
+            db = new DatabaseAdapter(getActivity());
+            profile = db.getProfile();
+
+            if (profile.firstName.length() > 0) {
+                nameTV.setText(profile.firstName + " " + profile.surname);
+            }
 
             TextView netCalTextTV = (TextView) rootView.findViewById(R.id.netCalText);
             netCalTextTV.setText(getResources().getString(R.string.calories_left_text));
@@ -245,6 +254,18 @@ public class ProfileCollectionFragment extends Fragment {
             View rootView = inflater.inflate(R.layout.goal_fragment, container, false);
 
 
+            ImageView goalImage = (ImageView) rootView.findViewById(R.id.exerciseImg);
+
+            goalImage.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(getActivity(), GoalSetupActivity.class);
+                    startActivity(intent);
+
+                }
+
+            });
 
             return rootView;
 

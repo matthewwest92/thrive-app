@@ -64,7 +64,7 @@
     <string name="calories_left_text">Net calories for today</string>
     <string name="calories_left_value">1300</string>
     <string name="placeholder_cals">0000</string>
-    <string name="user_name">Matthew West</string>
+    <string name="user_name">Create Profile</string>
     <string name="food_cals_text">Food</string>
     <string name="exercise_cals_text">Exercise</string>
     <string name="goal_cals_text">Goal</string>
