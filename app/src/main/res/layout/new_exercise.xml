@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <AutoCompleteTextView
+        android:id="@+id/fitnessNameAutoTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/exerciseTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:maxLines="1"
+        android:minWidth="180dp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exercise Activity"
+        android:textSize="16sp"
+        android:id="@+id/exerciseTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories Burned"
+        android:textSize="16sp"
+        android:id="@+id/caloriesBurnedTitle"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/TimeTitle"
+        android:layout_marginTop="32dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/caloriesBurnedEdit"
+        android:layout_alignTop="@+id/caloriesBurnedTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:editable="false"
+        android:maxLines="1"
+        android:minWidth="180dp"
+        android:singleLine="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration (mins)"
+        android:textSize="16sp"
+        android:id="@+id/TimeTitle"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/exerciseTitle"
+        android:layout_marginTop="32dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeEdit"
+        android:layout_alignTop="@+id/TimeTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:editable="true"
+        android:inputType="number"
+        android:maxLines="1"
+        android:minWidth="180dp"
+        android:singleLine="true" />
+
+</RelativeLayout>

@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by Matthew West on 11/04/2015.
  */
@@ -37,6 +39,44 @@ public class DatabaseAdapter  {
         } else {    //profile doesn't exist
             db.insert(DatabaseHelper.PROFILE_TABLE_NAME, null, contentValues);
         }
+    }
+
+    public void storeExercise(String name, float calories, float time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.FITNESS_TRACKER_NAME, name);
+        contentValues.put(DatabaseHelper.FITNESS_TRACKER_CALORIES_MIN, calories);
+        contentValues.put(DatabaseHelper.FITNESS_TRACKER_TIMESTAMP, time);
+        db.insert(DatabaseHelper.FITNESS_TRACKER_TABLE_NAME, null, contentValues);
+    }
+
+    public FitnessItem[] getFitnessDay(float time) {
+        ArrayList<String> nameList= new ArrayList<String>();
+        ArrayList<String> calsList= new ArrayList<String>();
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String[] columns = {DatabaseHelper.FITNESS_TRACKER_NAME,DatabaseHelper.FITNESS_TRACKER_CALORIES_MIN};
+        Cursor cursor=db.query(DatabaseHelper.FITNESS_TRACKER_TABLE_NAME, columns, DatabaseHelper.FITNESS_TRACKER_TIMESTAMP+" ="+time+"", null, null, null, null);
+        if(cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                int nameIndex = cursor.getColumnIndex(DatabaseHelper.FITNESS_TRACKER_NAME);
+                int calsIndex = cursor.getColumnIndex(DatabaseHelper.FITNESS_TRACKER_CALORIES_MIN);
+
+                nameList.add(cursor.getString(nameIndex));
+                calsList.add(String.valueOf(cursor.getFloat(calsIndex)));
+            }
+
+            FitnessItem results[] = new FitnessItem[nameList.size()];
+            for(int j =0;j<nameList.size();j++){
+                results[j] = new FitnessItem(nameList.get(j), calsList.get(j));
+            }
+            return results;
+        } else {
+            FitnessItem results[] = new FitnessItem[1];
+            results[0] = new FitnessItem("No Exercise recorded yet.", "");
+            return results;
+        }
+
     }
 
     public ProfileObject getProfile() {
@@ -122,6 +162,40 @@ public class DatabaseAdapter  {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.ACHIEVEMENT_STATUS, "1");
         db.update(DatabaseHelper.ACHIEVEMENT_TABLE_NAME, contentValues, DatabaseHelper.ACHIEVEMENT_NAME+" ='"+name+"'",null);
+    }
+
+    public float getExcerciseData(String name) {
+        float result = 0.0f;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String[] columns = {DatabaseHelper.FITNESS_CALORIES_MIN};
+        Cursor cursor=db.query(DatabaseHelper.FITNESS_TABLE_NAME, columns, DatabaseHelper.FITNESS_NAME+" ='"+name+"'", null, null, null, null);
+        if(cursor.moveToNext()) {
+            int calorieIndex = cursor.getColumnIndex(DatabaseHelper.FITNESS_CALORIES_MIN);
+            result = cursor.getFloat(calorieIndex);
+        }
+        return result;
+    }
+
+    public String[] getExerciseNameList() {
+        currentIndex=0;
+
+        ArrayList<String> arrlist= new ArrayList<String>();
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseHelper.FITNESS_NAME};
+        Cursor cursor=db.query(DatabaseHelper.FITNESS_TABLE_NAME, columns, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(DatabaseHelper.FITNESS_NAME);
+            arrlist.add(cursor.getString(nameIndex));
+        }
+
+        String results[] = new String[arrlist.size()];
+        for(int j =0;j<arrlist.size();j++){
+            results[j] = arrlist.get(j);
+        }
+
+        return results;
     }
 
     int currentIndex=0;

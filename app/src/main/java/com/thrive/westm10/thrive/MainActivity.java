@@ -73,7 +73,6 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-
     }
 
     @Override
@@ -92,7 +91,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section2);
                 break;
             case 2:
-                objFragment = new FitnessFragment();
+                objFragment = new FitnessCollectionFragment();
                 mTitle = getString(R.string.title_section3);
                 break;
             case 3:

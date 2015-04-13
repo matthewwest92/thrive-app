@@ -20,6 +20,10 @@
             android:name="com.thrive.westm10.thrive.ProfileSetupActivity"
             android:label="@string/app_name"
             />
+        <activity
+            android:name="com.thrive.westm10.thrive.NewExercise"
+            android:label="@string/app_name"
+            />
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 

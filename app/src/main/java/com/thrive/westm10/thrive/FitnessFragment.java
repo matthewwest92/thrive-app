@@ -1,13 +1,27 @@
 package com.thrive.westm10.thrive;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Matthew West on 30/03/2015.
@@ -16,6 +30,11 @@ public class FitnessFragment extends Fragment {
 
     private ListView mListView;
     private String[] mItemTitles;
+    DatabaseAdapter db;
+    TextView date;
+    DateConversion converter;
+    float julianDate;
+    FitnessAdapter adapter;
 
     public FitnessFragment() {
     }
@@ -26,6 +45,17 @@ public class FitnessFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fit_fragment, container, false);
         runCommand=(ImageButton) rootView.findViewById(R.id.runCommand);
 
+        db = new DatabaseAdapter(getActivity());
+
+        date = (TextView) rootView.findViewById(R.id.dateText);
+        converter = new DateConversion();
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        date.setText(String.valueOf(formattedDate));
+
+
         runCommand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,21 +65,39 @@ public class FitnessFragment extends Fragment {
 
         mItemTitles= getResources().getStringArray(R.array.exercise_list);
         mListView = (ListView) rootView.findViewById(R.id.fitness_list);
-        FitnessItem[] drawerItem = new FitnessItem[8];
+        Date convertDate = new Date();
+        try {
+            convertDate = df.parse(date.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        julianDate = (float) converter.dateToJulian(convertDate);
+        adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, db.getFitnessDay(julianDate));
 
-        drawerItem[0] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[1] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[2] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[3] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[4] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[5] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[6] = new FitnessItem("Jogging 5km", "200Kcal");
-        drawerItem[7] = new FitnessItem("Jogging 5km", "200Kcal");
+        ImageButton plusButton = (ImageButton) rootView.findViewById(R.id.runCommand);
 
-        FitnessAdapter adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, drawerItem);
+        // add button listener
+        plusButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getActivity(), NewExercise.class);
+                intent.putExtra("dateFromParent",julianDate);
+                startActivity(intent);
+            }
+        });
+
 
         mListView.setAdapter(adapter);
 
         return rootView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, db.getFitnessDay(julianDate));
+        adapter.notifyDataSetChanged();
+    }
+
 }

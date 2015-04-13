@@ -1,16 +1,25 @@
 package com.thrive.westm10.thrive;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -33,7 +42,7 @@ public class FitnessCollectionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_tabbed, null);
+        return inflater.inflate(R.layout.fitness_collection, null);
     }
 
     @Override
@@ -61,69 +70,115 @@ public class FitnessCollectionFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+            FitnessFragment fragment = new FitnessFragment();
+            Bundle args = new Bundle();
+            args.putInt("page_position", position + 1);
+            fragment.setArguments(args);
+            return fragment;
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
         }
-
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 7 total pages.
+            return 7;
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return "Monday".toUpperCase(l);
-                case 1:
-                    return "Tuesday".toUpperCase(l);
-                case 2:
-                    return "Wednesday".toUpperCase(l);
-            }
-            return null;
-        }
+    }
+
+    public void onResume() {
+        super.onResume();
+        //Fragment.
     }
 
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+    public static class FitnessFragment extends Fragment {
 
+        private ListView mListView;
+        private String[] mItemTitles;
+        DatabaseAdapter db;
+        TextView date;
+        DateConversion converter;
+        float julianDate;
+        FitnessAdapter adapter;
 
         private static final String ARG_SECTION_NUMBER = "section_number";
+        static int pos;
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static FitnessFragment newInstance(int sectionNumber) {
+            FitnessFragment fragment = new FitnessFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
+            pos=sectionNumber;
             return fragment;
         }
 
-        public PlaceholderFragment() {
+        public FitnessFragment() {
+
         }
 
+        ImageButton runCommand;
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
-            TextView tv = (TextView) rootView.findViewById(R.id.txtLabel);
-            tv.setText(tv+" yay");
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            Log.e("The position is: " + pos, "MSG");
+            View rootView = inflater.inflate(R.layout.fit_fragment, container, false);
+            runCommand=(ImageButton) rootView.findViewById(R.id.runCommand);
+
+            db = new DatabaseAdapter(getActivity());
+
+            date = (TextView) rootView.findViewById(R.id.dateText);
+            converter = new DateConversion();
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            c.setTime(c.getTime());
+            c.add(Calendar.DATE, -(getArguments().getInt("page_position")-1));
+            String formattedDate = df.format(c.getTime());
+            date.setText(String.valueOf(formattedDate));
+
+
+            runCommand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), "Selected Button", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            mItemTitles= getResources().getStringArray(R.array.exercise_list);
+            mListView = (ListView) rootView.findViewById(R.id.fitness_list);
+            Date convertDate = new Date();
+            try {
+                convertDate = df.parse(date.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            julianDate = (float) converter.dateToJulian(convertDate);
+            adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, db.getFitnessDay(julianDate));
+
+            ImageButton plusButton = (ImageButton) rootView.findViewById(R.id.runCommand);
+
+            // add button listener
+            plusButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    Intent intent = new Intent(getActivity(), NewExercise.class);
+                    intent.putExtra("dateFromParent",julianDate);
+                    startActivity(intent);
+                }
+            });
+
+
+            mListView.setAdapter(adapter);
 
             return rootView;
-
         }
+
+
     }
+
 
 }
