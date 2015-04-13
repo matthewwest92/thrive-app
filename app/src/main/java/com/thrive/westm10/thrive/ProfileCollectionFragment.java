@@ -3,6 +3,10 @@ package com.thrive.westm10.thrive;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -128,6 +132,11 @@ public class ProfileCollectionFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
         DatabaseAdapter db;
         ProfileObject profile;
+        GoalObject goal;
+        double exerciseCals;
+
+        DateConversion converter;
+        float julianDate;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -152,14 +161,33 @@ public class ProfileCollectionFragment extends Fragment {
             View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
             TextView nameTV = (TextView) rootView.findViewById(R.id.name);
             nameTV.setText(getResources().getString(R.string.user_name));
+            converter = new DateConversion();
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            c.setTime(c.getTime());
+            String formattedDate = df.format(c.getTime());
+
+
+            Date convertDate = new Date();
+            try {
+                convertDate = df.parse(formattedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            julianDate = (float) converter.dateToJulian(convertDate);
 
 
             db = new DatabaseAdapter(getActivity());
             profile = db.getProfile();
+            goal = db.getGoal();
+            exerciseCals = db.getDaysExerciseCalories(julianDate);
 
             if (profile.firstName.length() > 0) {
                 nameTV.setText(profile.firstName + " " + profile.surname);
             }
+
 
             TextView netCalTextTV = (TextView) rootView.findViewById(R.id.netCalText);
             netCalTextTV.setText(getResources().getString(R.string.calories_left_text));
@@ -174,12 +202,23 @@ public class ProfileCollectionFragment extends Fragment {
             goalCaltxtTV.setText(R.string.goal_cals_text);
 
 
+
             TextView foodCalValTV = (TextView) rootView.findViewById(R.id.foodCalval);
             foodCalValTV.setText(getResources().getString(R.string.placeholder_cals));
             TextView exerciseCalValTV = (TextView) rootView.findViewById(R.id.exerciseCalval);
             exerciseCalValTV.setText(getResources().getString(R.string.placeholder_cals));
             TextView goalCalValTV = (TextView) rootView.findViewById(R.id.goalCalval);
             goalCalValTV.setText(getResources().getString(R.string.placeholder_cals));
+
+            if(goal.targetCals != 0000) {
+                goalCalValTV.setText(String.valueOf(Math.round(goal.targetCals)));
+            }
+
+            if(exerciseCals != 0000) {
+                exerciseCalValTV.setText(String.valueOf(Math.round(exerciseCals)));
+            }
+
+            netCalValTV.setText(String.valueOf(Integer.parseInt(foodCalValTV.getText().toString())-Integer.parseInt(exerciseCalValTV.getText().toString())));
 
             avatarIV = (ImageView) rootView.findViewById(R.id.avatar);
             Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.unknown);
@@ -219,6 +258,14 @@ public class ProfileCollectionFragment extends Fragment {
                 e.printStackTrace();
             }
 
+        }
+
+        public static String fmt(double d)
+        {
+            if(d == (long) d)
+                return String.format("%d",(long)d);
+            else
+                return String.format("%s",d);
         }
     }
 

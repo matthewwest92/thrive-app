@@ -20,14 +20,12 @@ public class FitnessAdapter extends ArrayAdapter<FitnessItem> {
 
     Context mContext;
     int layoutResourceId;
-    FitnessItem data[] = null;
 
-    public FitnessAdapter(Context mContext, int layoutResourceId, FitnessItem[] data) {
+    public FitnessAdapter(Context mContext, int layoutResourceId) {
 
-        super(mContext, layoutResourceId, data);
+        super(mContext, layoutResourceId);
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
-        this.data = data;
     }
 
     @Override
@@ -35,13 +33,14 @@ public class FitnessAdapter extends ArrayAdapter<FitnessItem> {
 
         View listItem = convertView;
 
+        FitnessItem folder = getItem(position);
+
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         listItem = inflater.inflate(layoutResourceId, parent, false);
 
         TextView exerciseName = (TextView) listItem.findViewById(R.id.exerciseName);
         TextView exerciseCals = (TextView) listItem.findViewById(R.id.exerciseCals);
 
-        FitnessItem folder = data[position];
 
         exerciseName.setText(folder.name);
         exerciseCals.setText(folder.cals);

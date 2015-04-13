@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -86,16 +87,14 @@ public class FitnessCollectionFragment extends Fragment {
 
     }
 
-    public void onResume() {
-        super.onResume();
-        //Fragment.
-    }
+
 
     /**
      * A placeholder fragment containing a simple view.
      */
     public static class FitnessFragment extends Fragment {
 
+        private static final String TAG = FitnessFragment.class.getSimpleName();
         private ListView mListView;
         private String[] mItemTitles;
         DatabaseAdapter db;
@@ -120,9 +119,19 @@ public class FitnessCollectionFragment extends Fragment {
 
         }
 
+        @Override
+        public void onResume() {
+            super.onResume();
+            adapter.clear();
+            adapter.addAll(db.getFitnessDay(julianDate));
+            adapter.notifyDataSetChanged();
+        }
+
+
         ImageButton runCommand;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            Log.d(TAG, "onCreateView");
             Log.e("The position is: " + pos, "MSG");
             View rootView = inflater.inflate(R.layout.fit_fragment, container, false);
             runCommand=(ImageButton) rootView.findViewById(R.id.runCommand);
@@ -156,7 +165,8 @@ public class FitnessCollectionFragment extends Fragment {
                 e.printStackTrace();
             }
             julianDate = (float) converter.dateToJulian(convertDate);
-            adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, db.getFitnessDay(julianDate));
+            adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row);
+            adapter.addAll(db.getFitnessDay(julianDate));
 
             ImageButton plusButton = (ImageButton) rootView.findViewById(R.id.runCommand);
 
@@ -179,6 +189,8 @@ public class FitnessCollectionFragment extends Fragment {
 
 
     }
+
+
 
 
 }

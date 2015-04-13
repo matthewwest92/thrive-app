@@ -63,6 +63,32 @@ public class DatabaseAdapter  {
         }
     }
 
+    public GoalObject getGoal() {
+        GoalObject goal;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseHelper.GOAL_START_WEIGHT, DatabaseHelper.GOAL_DURATION, DatabaseHelper.GOAL_TYPE, DatabaseHelper.GOAL_START, DatabaseHelper.GOAL_END, DatabaseHelper.GOAL_SIZE, DatabaseHelper.GOAL_TARGET_CALS};
+        Cursor cursor=db.query(DatabaseHelper.GOAL_TABLE_NAME, columns, null, null, null, null, null);
+        if(cursor.moveToNext()) {
+            int startWeightIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_START_WEIGHT);
+            int durationIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_DURATION);
+            int typeIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_TYPE);
+            int startIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_START);
+            int endIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_END);
+            int targetIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_TARGET_CALS);
+            int sizeIndex = cursor.getColumnIndex(DatabaseHelper.GOAL_SIZE);
+
+            goal = new GoalObject(cursor.getFloat(startWeightIndex),cursor.getInt(durationIndex),cursor.getString(typeIndex),cursor.getFloat(startIndex), cursor.getFloat(endIndex),cursor.getFloat(targetIndex),cursor.getFloat(sizeIndex));
+
+        } else {
+            goal = new GoalObject( 0, 0, "" , 0 ,0,0000, 0);
+        }
+
+        return goal;
+
+
+    }
+
+
 
 
     public void storeExercise(String name, float calories, float time) {
@@ -101,6 +127,26 @@ public class DatabaseAdapter  {
             return results;
         }
 
+    }
+
+    public double getDaysExerciseCalories(float time) {
+        ArrayList<Double> calsList = new ArrayList<Double>();
+        double result=0;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String[] columns = {DatabaseHelper.FITNESS_TRACKER_NAME,DatabaseHelper.FITNESS_TRACKER_CALORIES_MIN};
+        Cursor cursor=db.query(DatabaseHelper.FITNESS_TRACKER_TABLE_NAME, columns, DatabaseHelper.FITNESS_TRACKER_TIMESTAMP+" ="+time+"", null, null, null, null);
+
+        if(cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                int calsIndex = cursor.getColumnIndex(DatabaseHelper.FITNESS_TRACKER_CALORIES_MIN);
+                result += cursor.getFloat(calsIndex);
+            }
+        } else {
+            result = 0000;
+        }
+
+        return result;
     }
 
     public ProfileObject getProfile() {

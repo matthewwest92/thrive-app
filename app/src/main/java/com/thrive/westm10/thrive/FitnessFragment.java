@@ -72,8 +72,8 @@ public class FitnessFragment extends Fragment {
             e.printStackTrace();
         }
         julianDate = (float) converter.dateToJulian(convertDate);
-        adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, db.getFitnessDay(julianDate));
-
+        adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row);
+        adapter.addAll(db.getFitnessDay(julianDate));
         ImageButton plusButton = (ImageButton) rootView.findViewById(R.id.runCommand);
 
         // add button listener
@@ -96,7 +96,9 @@ public class FitnessFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row, db.getFitnessDay(julianDate));
+
+        adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row);
+        adapter.addAll(db.getFitnessDay(julianDate));
         adapter.notifyDataSetChanged();
     }
 
