@@ -38,10 +38,10 @@ public class TipsFragment extends Fragment {
 
         TipItem[] tips = new TipItem[5];
 
-        tips[0] = new TipItem(R.drawable.article_1,"7 SPRING FOODS THAT HAVE A MUSCULAR APPROACH","Muscle and Fitness");
-        tips[1] = new TipItem(R.drawable.article_2,"PUSH-PULL COMBO TO BUILD UPPER-BODY MUSCLE","Muscle and Fitness");
-        tips[2] = new TipItem(R.drawable.article_3,"BARRY'S BOOTCAMP MINT NEAPOLITAN PROTEIN SHAKE","Womens Health");
-        tips[3] = new TipItem(R.drawable.article_4,"HOW JAIME LANNISTER GOT HIS BODY BATTLE-READY FOR GAME OF THRONES","Mens Health");
+        tips[0] = new TipItem(R.drawable.article_1,"7 Spring foods that have a muscular approach","Muscle and Fitness");
+        tips[1] = new TipItem(R.drawable.article_2,"Push-pull combo to build upper body muscle","Muscle and Fitness");
+        tips[2] = new TipItem(R.drawable.article_3,"Barry's Bootcamp: mint neapolitan protein shake","Womens Health");
+        tips[3] = new TipItem(R.drawable.article_4,"How Jaime Lannister got his body battle-ready for Game of Thrones","Mens Health");
         tips[4] = new TipItem(R.drawable.article_5,"5 Grocery Store Myths That Need to Be Stopped","The Kitchn");
 
 
@@ -53,7 +53,24 @@ public class TipsFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Uri uri = Uri.parse("https://www.google.com");
+                Uri uri = Uri.parse("http://www.google.co.uk");
+                switch(position) {
+                    case 0:
+                        uri = Uri.parse("http://www.muscleandfitness.com/nutrition/gain-mass/7-spring-foods-have-muscular-approach");
+                        break;
+                    case 1:
+                        uri = Uri.parse("http://www.muscleandfitness.com/workouts/workout-routines/push-pull-combo-build-upper-body-muscle");
+                        break;
+                    case 2:
+                        uri = Uri.parse("http://www.womenshealthmag.co.uk/nutrition/recipes/2784/barry-s-bootcamp-mint-neapolitan-protein-shake/");
+                        break;
+                    case 3:
+                        uri = Uri.parse("http://www.menshealth.co.uk/building-muscle/how-jaime-lannister-got-his-body-battle-ready-for-game-of-thrones");
+                        break;
+                    case 4:
+                        uri = Uri.parse("http://www.thekitchn.com/5-grocery-myths-dispelled-the-grocery-insider-217655");
+                        break;
+                }
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });

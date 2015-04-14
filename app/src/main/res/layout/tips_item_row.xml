@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/fitness_box"
+    android:background="@drawable/tip_box"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:padding="10dp"
     android:paddingTop="20dp"
