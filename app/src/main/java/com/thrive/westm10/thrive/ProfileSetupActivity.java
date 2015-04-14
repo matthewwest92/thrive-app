@@ -22,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -238,8 +239,6 @@ public class ProfileSetupActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Log.e("Message is" + directory.getAbsolutePath(), "MSG");
         return directory.getAbsolutePath();
     }
 

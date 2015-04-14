@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fitness_box"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:padding="10dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp">
+
+    <TextView
+        android:id="@+id/articleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:text="articleName"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/articleImage"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
+
+    <TextView
+        android:id="@+id/articleSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="articleSource"
+        android:layout_below="@+id/articleName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/articleImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/article_1"
+        android:adjustViewBounds="true" />
+
+</RelativeLayout>

@@ -100,12 +100,13 @@ public class NavigationDrawerFragment extends Fragment {
         mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerListView = (ListView) view.findViewById(R.id.left_drawer);
         mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
 
         drawerItem[0] = new ObjectDrawerItem(R.drawable.profile, "Profile");
         drawerItem[1] = new ObjectDrawerItem(R.drawable.apple, "Nutrition");
         drawerItem[2] = new ObjectDrawerItem(R.drawable.dumbell, "Fitness");
-        drawerItem[3] = new ObjectDrawerItem(R.drawable.settings, "Settings");
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.lightbulb, "Tips");
+        drawerItem[4] = new ObjectDrawerItem(R.drawable.settings, "Settings");
 
         DrawerAdapter adapter = new DrawerAdapter(getActivity(), R.layout.listview_item_row, drawerItem);
 

@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ProfileCollectionFragment extends Fragment {
@@ -134,6 +135,7 @@ public class ProfileCollectionFragment extends Fragment {
         ProfileObject profile;
         GoalObject goal;
         double exerciseCals;
+        double foodCals;
 
         DateConversion converter;
         float julianDate;
@@ -242,6 +244,7 @@ public class ProfileCollectionFragment extends Fragment {
             profile = db.getProfile();
             goal = db.getGoal();
             exerciseCals = db.getDaysExerciseCalories(julianDate);
+            foodCals = db.getDaysFoodCalories(julianDate);
 
             ContextWrapper cw = new ContextWrapper(getActivity());
             File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -249,9 +252,17 @@ public class ProfileCollectionFragment extends Fragment {
 
             if (profile.firstName.length() > 0) {
                 nameTV.setText(profile.firstName + " " + profile.surname);
+
+                if(!(db.isUnlocked("You''re Set!"))) {
+                    db.unlockAchievement("You''re Set!");
+                    Toast.makeText(getActivity(), "Achievement Unlocked: You're Set!", Toast.LENGTH_LONG).show();
+                }
             }
 
 
+            if (foodCals != 0000) {
+                foodCalValTV.setText(String.valueOf(Math.round(foodCals)));
+            }
 
             if(goal.targetCals != 0000) {
                 goalCalValTV.setText(String.valueOf(Math.round(goal.targetCals)));
@@ -354,29 +365,40 @@ public class ProfileCollectionFragment extends Fragment {
             String rateHolder=".";
             String typeHolder="";
 
-            if (goal.type.equals("Maintain my weight")) {
-                goalImage.setImageResource(R.drawable.maintenance);
-            } else if (goal.type.equals("Gain weight")) {
-                goalImage.setImageResource(R.drawable.dumbells);
+            if(goal.startWeight > 0) {
+                if (!(db.isUnlocked("First steps"))) {
+                    db.unlockAchievement("First steps");
+                    Toast.makeText(getActivity(), "Unlocked Achievement: First Steps", Toast.LENGTH_LONG).show();
+                }
+
+
+                if (goal.type.equals("Maintain my weight")) {
+                    goalImage.setImageResource(R.drawable.maintenance);
+                } else if (goal.type.equals("Gain weight")) {
+                    goalImage.setImageResource(R.drawable.dumbells);
+                } else {
+                    goalImage.setImageResource(R.drawable.runner);
+                }
+
+                if (goal.duration > 0) {
+                    durationHolder = goal.duration + " months";
+                } else {
+                    durationHolder = "for the foreseeable future";
+                }
+                if (goal.rate != 0.0) {
+                    rateHolder = " at a rate of " + goal.rate + " lb's per week.";
+                }
+                startText.setText("Your goal is to " + goal.type.toLowerCase() + " for a total of " + durationHolder + rateHolder);
+
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                String startDate = df.format(converter.julianToDate(goal.startDate));
+                String endDate = df.format(converter.julianToDate(goal.endDate));
+
+                secondText.setText("This goal was started on " + startDate + " and is set to finish on " + endDate + ".");
             } else {
-                goalImage.setImageResource(R.drawable.runner);
+                startText.setText("You haven't set up a goal yet.");
+                secondText.setText("press the image of the man to begin.");
             }
-
-            if(goal.duration > 0) {
-                durationHolder = goal.duration + " months";
-            } else {
-                durationHolder = "for the foreseeable future";
-            }
-            if(goal.rate != 0.0) {
-                rateHolder = " at a rate of " + goal.rate + " lb's per week.";
-            }
-            startText.setText("Your goal is to "+ goal.type.toLowerCase()+" for a total of "+durationHolder+rateHolder);
-
-            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-            String startDate = df.format(converter.julianToDate(goal.startDate));
-            String endDate = df.format(converter.julianToDate(goal.endDate));
-
-            secondText.setText("This goal was started on "+startDate+" and is set to finish on "+endDate+".");
 
         }
     }
@@ -389,6 +411,8 @@ public class ProfileCollectionFragment extends Fragment {
 
         private ListView mListView;
         private String[] mItemTitles;
+        AchievementAdapter adapter;
+        DatabaseAdapter db;
 
         private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -409,16 +433,20 @@ public class ProfileCollectionFragment extends Fragment {
         }
 
         @Override
+        public void onResume() {
+            super.onResume();
+            }
+
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.achievement_fragment, container, false);
 
             mItemTitles= getResources().getStringArray(R.array.achievement_list_array);
             mListView = (ListView) rootView.findViewById(R.id.achievement_list);
-            DatabaseAdapter db = new DatabaseAdapter(getActivity());
-            db.unlockAchievement("You''re Set!");
+            db = new DatabaseAdapter(getActivity());
 
-            AchievementAdapter adapter = new AchievementAdapter(getActivity(), R.layout.achievement_list_row, db.getAchievementsData());
+            adapter = new AchievementAdapter(getActivity(), R.layout.achievement_list_row, db.getAchievementsData());
 
             mListView.setAdapter(adapter);
 

@@ -1,14 +1,18 @@
 package com.thrive.westm10.thrive;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -74,6 +78,32 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       /*Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setLargeIcon(bm)
+                        .setContentTitle("Have you been keeping fit?")
+                        .setContentText("Fill out your fitness diary for the day!");
+
+        Intent resultIntent = new Intent(this, MainActivity.class);
+
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        int mNotificationId = 001;
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+        mBuilder.setContentIntent(resultPendingIntent);*/
+
 
         prefs = getSharedPreferences("com.thrive.westm10", MODE_PRIVATE);
 
@@ -111,8 +141,12 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section3);
                 break;
             case 3:
-                objFragment = new SettingsActivity();
+                objFragment = new TipsFragment();
                 mTitle = getString(R.string.title_section4);
+                break;
+            case 4:
+                objFragment = new SettingsActivity();
+                mTitle = getString(R.string.title_section5);
                 break;
         }
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();

@@ -63,7 +63,7 @@ public class FitnessFragment extends Fragment {
             }
         });
 
-        mItemTitles= getResources().getStringArray(R.array.exercise_list);
+        //mItemTitles= getResources().getStringArray(R.array.exercise_list);
         mListView = (ListView) rootView.findViewById(R.id.fitness_list);
         Date convertDate = new Date();
         try {

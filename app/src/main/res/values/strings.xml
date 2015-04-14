@@ -36,7 +36,9 @@
     <string name="title_section1">Profile</string>
     <string name="title_section2">Nutrition</string>
     <string name="title_section3">Fitness</string>
-    <string name="title_section4">Settings</string>
+    <string name="title_section4">Tips</string>
+    <string name="title_section5">Settings</string>
+
 
     <string name="profile_section1">Overview</string>
     <string name="profile_section2">Goals</string>
