@@ -73,7 +73,7 @@ public class NutritionCollectionFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            FitnessFragment fragment = new FitnessFragment();
+            NutritionFragment fragment = new NutritionFragment();
             Bundle args = new Bundle();
             args.putInt("page_position", position + 1);
             fragment.setArguments(args);
@@ -94,22 +94,22 @@ public class NutritionCollectionFragment extends Fragment {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class FitnessFragment extends Fragment {
+    public static class NutritionFragment extends Fragment {
 
-        private static final String TAG = FitnessFragment.class.getSimpleName();
+        private static final String TAG = NutritionFragment.class.getSimpleName();
         private ListView mListView;
         private String[] mItemTitles;
         DatabaseAdapter db;
         TextView date;
         DateConversion converter;
         float julianDate;
-        FitnessAdapter adapter;
+        NutritionAdapter adapter;
 
         private static final String ARG_SECTION_NUMBER = "section_number";
         static int pos;
 
-        public static FitnessFragment newInstance(int sectionNumber) {
-            FitnessFragment fragment = new FitnessFragment();
+        public static NutritionFragment newInstance(int sectionNumber) {
+            NutritionFragment fragment = new NutritionFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -117,7 +117,7 @@ public class NutritionCollectionFragment extends Fragment {
             return fragment;
         }
 
-        public FitnessFragment() {
+        public NutritionFragment() {
 
         }
 
@@ -125,16 +125,33 @@ public class NutritionCollectionFragment extends Fragment {
         public void onResume() {
             super.onResume();
             adapter.clear();
-            adapter.addAll(db.getFitnessDay(julianDate));
+            adapter.addAll(db.getFoodDay(julianDate));
             adapter.notifyDataSetChanged();
+
+            if(db.getDaysFoodCalories(julianDate) != 0000) {
+                if(!(db.isUnlocked("Full up"))) {
+                    db.unlockAchievement("Full up");
+                    Toast.makeText(getActivity(), "Achievement Unlocked: Full up", Toast.LENGTH_LONG).show();
+                }
+                if(db.getDaysFoodCalories(julianDate) >= 3000) {
+                    if(!(db.isUnlocked("Man vs Food"))) {
+                        db.unlockAchievement("Man vs Food");
+                        Toast.makeText(getActivity(), "Achievement Unlocked: Man vs Food", Toast.LENGTH_LONG).show();
+                    }
+                }
+                if(db.getDaysExerciseCalories(julianDate) != 0000) {
+                    if(!(db.isUnlocked("Completionist"))) {
+                        db.unlockAchievement("Completionist");
+                        Toast.makeText(getActivity(), "Achievement Unlocked: Completionist", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
         }
 
 
         ImageButton runCommand;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            Log.d(TAG, "onCreateView");
-            Log.e("The position is: " + pos, "MSG");
             View rootView = inflater.inflate(R.layout.fit_fragment, container, false);
             runCommand=(ImageButton) rootView.findViewById(R.id.runCommand);
 
@@ -158,7 +175,7 @@ public class NutritionCollectionFragment extends Fragment {
                 }
             });
 
-            mItemTitles= getResources().getStringArray(R.array.exercise_list);
+            //mItemTitles= getResources().getStringArray(R.array.exercise_list);
             mListView = (ListView) rootView.findViewById(R.id.fitness_list);
             Date convertDate = new Date();
             try {
@@ -167,8 +184,8 @@ public class NutritionCollectionFragment extends Fragment {
                 e.printStackTrace();
             }
             julianDate = (float) converter.dateToJulian(convertDate);
-            adapter = new FitnessAdapter(getActivity(), R.layout.fitness_item_row);
-            adapter.addAll(db.getFitnessDay(julianDate));
+            adapter = new NutritionAdapter(getActivity(), R.layout.fitness_item_row);
+            adapter.addAll(db.getFoodDay(julianDate));
 
             ImageButton plusButton = (ImageButton) rootView.findViewById(R.id.runCommand);
 
@@ -177,7 +194,7 @@ public class NutritionCollectionFragment extends Fragment {
 
                 @Override
                 public void onClick(View arg0) {
-                    Intent intent = new Intent(getActivity(), NewExercise.class);
+                    Intent intent = new Intent(getActivity(), NewFood.class);
                     intent.putExtra("dateFromParent",julianDate);
                     startActivity(intent);
                 }
@@ -207,9 +224,9 @@ public class NutritionCollectionFragment extends Fragment {
                 case R.id.action_delete:
                     TextView listExName = (TextView) view.findViewById(R.id.exerciseName);
                     TextView listExCals = (TextView) view.findViewById(R.id.exerciseCals);
-                    db.deleteExercise(listExName.getText().toString(), Float.parseFloat(listExCals.getText().toString()), julianDate);
+                    db.deleteFood(listExName.getText().toString(), Float.parseFloat(listExCals.getText().toString()), julianDate);
                     adapter.clear();
-                    adapter.addAll(db.getFitnessDay(julianDate));
+                    adapter.addAll(db.getFoodDay(julianDate));
                     adapter.notifyDataSetChanged();
                     return true;
                 default:

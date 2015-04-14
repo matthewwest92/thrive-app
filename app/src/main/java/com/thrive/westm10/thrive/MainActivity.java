@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,8 +18,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class MainActivity extends ActionBarActivity
@@ -38,6 +43,17 @@ public class MainActivity extends ActionBarActivity
             db.insertAchievementsData();
             db.insertExerciseData();
 
+            String mCSVfile = "foodData.csv";
+            AssetManager manager = this.getAssets();
+            InputStream inStream = null;
+            try {
+                inStream = manager.open(mCSVfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+            db.insertFoodData(buffer);
         }
     }
 
@@ -87,7 +103,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section1);
                 break;
             case 1:
-                objFragment = new NutritionFragment();
+                objFragment = new NutritionCollectionFragment();
                 mTitle = getString(R.string.title_section2);
                 break;
             case 2:

@@ -25,6 +25,10 @@
             android:label="@string/app_name"
             />
         <activity
+            android:name="com.thrive.westm10.thrive.NewFood"
+            android:label="@string/app_name"
+            />
+        <activity
             android:name="com.thrive.westm10.thrive.GoalSetupActivity"
             android:label="@string/app_name"
             />

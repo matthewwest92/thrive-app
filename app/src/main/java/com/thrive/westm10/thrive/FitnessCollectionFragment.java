@@ -129,6 +129,19 @@ public class FitnessCollectionFragment extends Fragment {
             adapter.clear();
             adapter.addAll(db.getFitnessDay(julianDate));
             adapter.notifyDataSetChanged();
+
+            if(db.getDaysExerciseCalories(julianDate) != 0000 && db.getDaysFoodCalories(julianDate) != 0000) {
+                if(!(db.isUnlocked("Completionist"))) {
+                    db.unlockAchievement("Completionist");
+                    Toast.makeText(getActivity(), "Achievement Unlocked: Completionist", Toast.LENGTH_LONG).show();
+                }
+            }
+            if(mListView.getAdapter().getCount() >= 3) {
+                if(!(db.isUnlocked("Fitness Fanatic"))) {
+                    db.unlockAchievement("Fitness Fanatic");
+                    Toast.makeText(getActivity(), "Achievement Unlocked: Fitness Fanatic", Toast.LENGTH_LONG).show();
+                }
+            }
         }
 
 
@@ -160,7 +173,7 @@ public class FitnessCollectionFragment extends Fragment {
                 }
             });
 
-            mItemTitles= getResources().getStringArray(R.array.exercise_list);
+            // mItemTitles= getResources().getStringArray(R.array.exercise_list);
             mListView = (ListView) rootView.findViewById(R.id.fitness_list);
             Date convertDate = new Date();
             try {

@@ -33,17 +33,6 @@
         <item>Achievement 8 description</item>
     </string-array>
 
-    <string-array name="exercise_list">
-        <item>Jogging 1KM</item>
-        <item>Jogging 2KM</item>
-        <item>Jogging 3KM</item>
-        <item>Jogging 4KM</item>
-        <item>Jogging 5KM</item>
-        <item>Jogging 6KM</item>
-        <item>Jogging 7KM</item>
-        <item>Jogging 8KM</item>
-    </string-array>
-
     <string name="title_section1">Profile</string>
     <string name="title_section2">Nutrition</string>
     <string name="title_section3">Fitness</string>

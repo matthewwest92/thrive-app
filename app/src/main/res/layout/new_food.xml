@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/info_background" >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Name"
+        android:textSize="18sp"
+        android:id="@+id/foodTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Serving Size (g/ml)"
+            android:textSize="18sp"
+            android:id="@+id/servingTitle"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/foodTitle"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calories"
+            android:textSize="18sp"
+            android:id="@+id/calTitle"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/servingTitle"/>
+
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodNameEdit"
+            android:layout_alignTop="@+id/foodTitle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:editable="true"
+            android:maxLines="1"
+            android:minWidth="150dp"
+            android:maxWidth="150dp"
+            android:singleLine="true" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/servingSizeEdit"
+            android:layout_alignTop="@+id/servingTitle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:editable="true"
+            android:maxLines="1"
+            android:minWidth="150dp"
+            android:singleLine="true"
+            android:inputType="number"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calEdit"
+            android:layout_alignTop="@+id/calTitle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:editable="true"
+            android:maxLines="1"
+            android:minWidth="150dp"
+            android:singleLine="true" />
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fat (g)"
+                android:textSize="18sp"
+                android:id="@+id/fatTitle"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cholesterol (mg)"
+                android:textSize="18sp"
+                android:id="@+id/cholTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/fatTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sodium (mg)"
+                android:textSize="18sp"
+                android:id="@+id/sodiumTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/cholTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Potassium (mg)"
+                android:textSize="18sp"
+                android:id="@+id/potassiumTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/sodiumTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carbohydrates (g)"
+                android:textSize="18sp"
+                android:id="@+id/carbTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/potassiumTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sugar(g)"
+                android:textSize="18sp"
+                android:id="@+id/sugarTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/carbTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Protein (g)"
+                android:textSize="18sp"
+                android:id="@+id/proteinTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/sugarTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calcium (g)"
+                android:textSize="18sp"
+                android:id="@+id/calciumTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/proteinTitle"
+                android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iron (mg)"
+                android:textSize="18sp"
+                android:id="@+id/ironTitle"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/calciumTitle"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/fatVal"
+                android:layout_alignTop="@+id/fatTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/cholVal"
+                android:layout_alignTop="@+id/cholTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/sodiumVal"
+                android:layout_alignTop="@+id/sodiumTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/potassiumVal"
+                android:layout_alignTop="@+id/potassiumTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/carbVal"
+                android:layout_alignTop="@+id/carbTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/sugarVal"
+                android:layout_alignTop="@+id/sugarTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/proteinVal"
+                android:layout_alignTop="@+id/proteinTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/calciumVal"
+                android:layout_alignTop="@+id/calciumTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/ironVal"
+                android:layout_alignTop="@+id/ironTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"/>
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

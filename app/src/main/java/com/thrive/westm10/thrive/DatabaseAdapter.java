@@ -9,6 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.style.TtsSpan;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
@@ -88,6 +96,35 @@ public class DatabaseAdapter  {
 
     }
 
+    public void insertFoodData(BufferedReader buffer) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String line = "";
+        db.beginTransaction();
+        try {
+            while ((line = buffer.readLine()) != null) {
+                String[] colums = line.split("\\|");
+                ContentValues cv = new ContentValues(3);
+                cv.put(DatabaseHelper.NUTRITION_FOOD_NAME, colums[0].trim());
+                cv.put(DatabaseHelper.NUTRITION_SERVING_SIZE, colums[1].trim());
+                cv.put(DatabaseHelper.NUTRITION_CALORIES, colums[2].trim());
+                cv.put(DatabaseHelper.NUTRITION_FAT, colums[3].trim());
+                cv.put(DatabaseHelper.NUTRITION_CHOLESTEROL, colums[4].trim());
+                cv.put(DatabaseHelper.NUTRITION_SODIUM, colums[5].trim());
+                cv.put(DatabaseHelper.NUTRITION_POTASSIUM, colums[6].trim());
+                cv.put(DatabaseHelper.NUTRITION_CARBOHYDRATES, colums[7].trim());
+                cv.put(DatabaseHelper.NUTRITION_SUGAR, colums[8].trim());
+                cv.put(DatabaseHelper.NUTRITION_PROTEIN, colums[9].trim());
+                cv.put(DatabaseHelper.NUTRITION_CALCIUM, colums[10].trim());
+                cv.put(DatabaseHelper.NUTRITION_IRON, colums[11].trim());
+                db.insert(DatabaseHelper.NUTRITION_TABLE_NAME, null, cv);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+
 
 
 
@@ -132,6 +169,69 @@ public class DatabaseAdapter  {
             return results;
         }
 
+    }
+
+    public FoodItem[] getFoodDay(float time) {
+        ArrayList<String> nameList= new ArrayList<String>();
+        ArrayList<String> calsList= new ArrayList<String>();
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String[] columns = {DatabaseHelper.NUTRITION_TRACKER_FOOD_NAME,DatabaseHelper.NUTRITION_TRACKER_CALORIES};
+        Cursor cursor=db.query(DatabaseHelper.NUTRITION_TRACKER_TABLE_NAME, columns, DatabaseHelper.NUTRITION_TRACKER_TIMESTAMP+" ="+time+"", null, null, null, null);
+        if(cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                int nameIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_TRACKER_FOOD_NAME);
+                int calsIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_TRACKER_CALORIES);
+
+                nameList.add(cursor.getString(nameIndex));
+                calsList.add(String.valueOf(cursor.getFloat(calsIndex)));
+            }
+
+            FoodItem results[] = new FoodItem[nameList.size()];
+            for(int j =0;j<nameList.size();j++){
+                results[j] = new FoodItem(nameList.get(j), calsList.get(j));
+            }
+            return results;
+        } else {
+            FoodItem results[] = new FoodItem[1];
+            results[0] = new FoodItem("No food recorded yet.", "");
+            return results;
+        }
+
+    }
+
+    public void deleteFood(String name, float calories, float time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(DatabaseHelper.NUTRITION_TRACKER_TABLE_NAME,DatabaseHelper.NUTRITION_TRACKER_TIMESTAMP+" ="+time+" AND "+DatabaseHelper.NUTRITION_TRACKER_CALORIES+" ="+calories+" AND "+DatabaseHelper.NUTRITION_TRACKER_FOOD_NAME+" ='"+name+"'", null);
+    }
+
+    public void storeFood(String name, float calories, float time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.NUTRITION_TRACKER_FOOD_NAME, name);
+        contentValues.put(DatabaseHelper.NUTRITION_TRACKER_CALORIES, calories);
+        contentValues.put(DatabaseHelper.NUTRITION_TRACKER_TIMESTAMP, time);
+        db.insert(DatabaseHelper.NUTRITION_TRACKER_TABLE_NAME, null, contentValues);
+    }
+
+    public double getDaysFoodCalories(float time) {
+        ArrayList<Double> calsList = new ArrayList<Double>();
+        double result=0;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String[] columns = {DatabaseHelper.NUTRITION_TRACKER_FOOD_NAME,DatabaseHelper.NUTRITION_TRACKER_CALORIES};
+        Cursor cursor=db.query(DatabaseHelper.NUTRITION_TRACKER_TABLE_NAME, columns, DatabaseHelper.NUTRITION_TRACKER_TIMESTAMP+" ="+time+"", null, null, null, null);
+
+        if(cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                int calsIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_TRACKER_CALORIES);
+                result += cursor.getFloat(calsIndex);
+            }
+        } else {
+            result = 0000;
+        }
+
+        return result;
     }
 
     public double getDaysExerciseCalories(float time) {
@@ -239,6 +339,21 @@ public class DatabaseAdapter  {
         db.update(DatabaseHelper.ACHIEVEMENT_TABLE_NAME, contentValues, DatabaseHelper.ACHIEVEMENT_NAME+" ='"+name+"'",null);
     }
 
+    public Boolean isUnlocked(String name) {
+        Boolean decision=false;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.ACHIEVEMENT_STATUS, "1");
+        String[] columns = {DatabaseHelper.ACHIEVEMENT_NAME, DatabaseHelper.ACHIEVEMENT_STATUS};
+        Cursor cursor=db.query(DatabaseHelper.ACHIEVEMENT_TABLE_NAME, columns, DatabaseHelper.ACHIEVEMENT_STATUS+" = 1 AND "+ DatabaseHelper.ACHIEVEMENT_NAME+" ='"+name+"'", null, null, null, null);
+
+        if(cursor.getCount() != 0) {
+            decision=true;
+        }
+
+        return decision;
+    }
+
     public float getExcerciseData(String name) {
         float result = 0.0f;
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -271,6 +386,52 @@ public class DatabaseAdapter  {
         }
 
         return results;
+    }
+
+    public String[] getFoodNameList() {
+        currentIndex=0;
+
+        ArrayList<String> arrlist= new ArrayList<String>();
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseHelper.NUTRITION_FOOD_NAME};
+        Cursor cursor=db.query(DatabaseHelper.NUTRITION_TABLE_NAME, columns, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_FOOD_NAME);
+            arrlist.add(cursor.getString(nameIndex));
+        }
+
+        String results[] = new String[arrlist.size()];
+        for(int j =0;j<arrlist.size();j++){
+            results[j] = arrlist.get(j);
+        }
+
+        return results;
+    }
+
+    public FoodObject getFoodData(String name) {
+        FoodObject result;
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String[] columns = {DatabaseHelper.NUTRITION_FOOD_NAME, DatabaseHelper.NUTRITION_CALORIES, DatabaseHelper.NUTRITION_FAT, DatabaseHelper.NUTRITION_CHOLESTEROL, DatabaseHelper.NUTRITION_SODIUM, DatabaseHelper.NUTRITION_POTASSIUM, DatabaseHelper.NUTRITION_CARBOHYDRATES, DatabaseHelper.NUTRITION_SUGAR, DatabaseHelper.NUTRITION_PROTEIN, DatabaseHelper.NUTRITION_CALCIUM, DatabaseHelper.NUTRITION_IRON};
+        Cursor cursor=db.query(DatabaseHelper.NUTRITION_TABLE_NAME, columns, DatabaseHelper.NUTRITION_FOOD_NAME+" ='"+name+"'", null, null, null, null);
+        if(cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_FOOD_NAME);
+            int calorieIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_CALORIES);
+            int fatIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_FAT);
+            int cholesterolIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_CHOLESTEROL);
+            int sodiumIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_SODIUM);
+            int potassiumIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_POTASSIUM);
+            int carbIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_CARBOHYDRATES);
+            int sugarIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_SUGAR);
+            int proteinIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_PROTEIN);
+            int calciumIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_CALCIUM);
+            int ironIndex = cursor.getColumnIndex(DatabaseHelper.NUTRITION_IRON);
+            result = new FoodObject(cursor.getString(nameIndex), 0.0f,cursor.getInt(calorieIndex), cursor.getFloat(fatIndex), cursor.getFloat(cholesterolIndex), cursor.getFloat(sodiumIndex), cursor.getFloat(potassiumIndex), cursor.getFloat(carbIndex), cursor.getFloat(sugarIndex), cursor.getFloat(proteinIndex), cursor.getFloat(calciumIndex),cursor.getFloat(ironIndex));
+        } else {
+            result = new FoodObject("", 100, 0, 0.0f, 0.0f, 0.0f, 0.0f,0.0f,0.0f,0.0f,0.0f,0.0f);
+        }
+        return result;
     }
 
     int currentIndex=0;
@@ -414,11 +575,6 @@ public class DatabaseAdapter  {
                 e.printStackTrace();
             }
             try{
-                db.execSQL("CREATE TABLE "+NUTRITION_TRACKER_TABLE_NAME+"("+NUTRITION_TRACKER_UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+NUTRITION_TRACKER_FOOD_NAME+" VARCHAR(255), "+NUTRITION_TRACKER_CALORIES+" INTEGER, "+NUTRITION_TRACKER_TIMESTAMP+" REAL);");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try{
                 db.execSQL("CREATE TABLE "+FITNESS_TABLE_NAME+"("+FITNESS_UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+FITNESS_NAME+" VARCHAR(255), "+FITNESS_CALORIES_MIN+" REAL);");
 
             } catch (SQLException e) {
@@ -494,7 +650,7 @@ public class DatabaseAdapter  {
         private static final String NUTRITION_TRACKER_UID = "_id";
         private static final String NUTRITION_TRACKER_FOOD_NAME = "name";
         private static final String NUTRITION_TRACKER_CALORIES = "calories";
-        private static final String NUTRITION_TRACKER_TIMESTAMP = "calories";
+        private static final String NUTRITION_TRACKER_TIMESTAMP = "timestamp";
 
         private static final String FITNESS_UID = "_id";
         private static final String FITNESS_NAME = "name";
