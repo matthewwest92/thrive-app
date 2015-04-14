@@ -8,9 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -183,8 +187,36 @@ public class FitnessCollectionFragment extends Fragment {
 
 
             mListView.setAdapter(adapter);
+            registerForContextMenu(mListView);
 
             return rootView;
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v,
+                                        ContextMenu.ContextMenuInfo menuInfo) {
+            super.onCreateContextMenu(menu, v, menuInfo);
+            MenuInflater inflater = getActivity().getMenuInflater();
+            inflater.inflate(R.menu.context_menu, menu);
+        }
+
+        @Override
+        public boolean onContextItemSelected(MenuItem item) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            int index = info.position;
+            View view = info.targetView;
+            switch (item.getItemId()) {
+                case R.id.action_delete:
+                    TextView listExName = (TextView) view.findViewById(R.id.exerciseName);
+                    TextView listExCals = (TextView) view.findViewById(R.id.exerciseCals);
+                    db.deleteExercise(listExName.getText().toString(),Float.parseFloat(listExCals.getText().toString()), julianDate);
+                    adapter.clear();
+                    adapter.addAll(db.getFitnessDay(julianDate));
+                    adapter.notifyDataSetChanged();
+                    return true;
+                default:
+                    return super.onContextItemSelected(item);
+            }
         }
 
 

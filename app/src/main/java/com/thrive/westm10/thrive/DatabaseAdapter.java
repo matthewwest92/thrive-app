@@ -100,6 +100,11 @@ public class DatabaseAdapter  {
         db.insert(DatabaseHelper.FITNESS_TRACKER_TABLE_NAME, null, contentValues);
     }
 
+    public void deleteExercise(String name, float calories, float time) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(DatabaseHelper.FITNESS_TRACKER_TABLE_NAME,DatabaseHelper.FITNESS_TRACKER_TIMESTAMP+" ="+time+" AND "+DatabaseHelper.FITNESS_TRACKER_CALORIES_MIN+" ="+calories+" AND "+DatabaseHelper.FITNESS_TRACKER_NAME+" ='"+name+"'", null);
+    }
+
     public FitnessItem[] getFitnessDay(float time) {
         ArrayList<String> nameList= new ArrayList<String>();
         ArrayList<String> calsList= new ArrayList<String>();

@@ -79,7 +79,7 @@ public class NewExercise extends ActionBarActivity {
                     if(actv.getText().toString().length() > 0 && durationText.getText().toString().length() > 0) {
                         float resultCalories = db.getExcerciseData(actv.getText().toString());
                         resultCalories = resultCalories * Float.parseFloat(durationText.getText().toString()) *db.getProfile().weight;
-                        calsText.setText(String.valueOf(resultCalories));
+                        calsText.setText(String.valueOf(Math.round(resultCalories)));
                     }
                 }
             }
@@ -93,7 +93,7 @@ public class NewExercise extends ActionBarActivity {
                     if(actv.getText().toString().length() > 0 && durationText.getText().toString().length() > 0) {
                         float resultCalories = db.getExcerciseData(actv.getText().toString());
                         resultCalories = resultCalories * Float.parseFloat(durationText.getText().toString()) *db.getProfile().weight;
-                        calsText.setText(String.valueOf(resultCalories));
+                        calsText.setText(String.valueOf(Math.round(resultCalories)));
                     }
                 }
             }

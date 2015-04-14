@@ -137,6 +137,12 @@ public class ProfileCollectionFragment extends Fragment {
 
         DateConversion converter;
         float julianDate;
+        TextView goalCalValTV;
+        TextView exerciseCalValTV;
+        TextView nameTV;
+        TextView foodCaltxtTV;
+        TextView netCalValTV;
+        TextView foodCalValTV;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -159,7 +165,7 @@ public class ProfileCollectionFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
-            TextView nameTV = (TextView) rootView.findViewById(R.id.name);
+            nameTV = (TextView) rootView.findViewById(R.id.name);
             nameTV.setText(getResources().getString(R.string.user_name));
             converter = new DateConversion();
 
@@ -180,21 +186,14 @@ public class ProfileCollectionFragment extends Fragment {
 
 
             db = new DatabaseAdapter(getActivity());
-            profile = db.getProfile();
-            goal = db.getGoal();
-            exerciseCals = db.getDaysExerciseCalories(julianDate);
-
-            if (profile.firstName.length() > 0) {
-                nameTV.setText(profile.firstName + " " + profile.surname);
-            }
 
 
             TextView netCalTextTV = (TextView) rootView.findViewById(R.id.netCalText);
             netCalTextTV.setText(getResources().getString(R.string.calories_left_text));
-            TextView netCalValTV = (TextView) rootView.findViewById(R.id.netCalVal);
+            netCalValTV = (TextView) rootView.findViewById(R.id.netCalVal);
             netCalValTV.setText(getResources().getString(R.string.calories_left_value));
 
-            TextView foodCaltxtTV = (TextView) rootView.findViewById(R.id.foodCaltxt);
+            foodCaltxtTV = (TextView) rootView.findViewById(R.id.foodCaltxt);
             TextView exerciseCaltxtTV = (TextView) rootView.findViewById(R.id.exerciseCaltxt);
             TextView goalCaltxtTV = (TextView) rootView.findViewById(R.id.goalCaltxt);
             foodCaltxtTV.setText(R.string.food_cals_text);
@@ -203,31 +202,23 @@ public class ProfileCollectionFragment extends Fragment {
 
 
 
-            TextView foodCalValTV = (TextView) rootView.findViewById(R.id.foodCalval);
+            foodCalValTV = (TextView) rootView.findViewById(R.id.foodCalval);
             foodCalValTV.setText(getResources().getString(R.string.placeholder_cals));
-            TextView exerciseCalValTV = (TextView) rootView.findViewById(R.id.exerciseCalval);
+            exerciseCalValTV = (TextView) rootView.findViewById(R.id.exerciseCalval);
             exerciseCalValTV.setText(getResources().getString(R.string.placeholder_cals));
-            TextView goalCalValTV = (TextView) rootView.findViewById(R.id.goalCalval);
+            goalCalValTV = (TextView) rootView.findViewById(R.id.goalCalval);
             goalCalValTV.setText(getResources().getString(R.string.placeholder_cals));
 
-            if(goal.targetCals != 0000) {
-                goalCalValTV.setText(String.valueOf(Math.round(goal.targetCals)));
-            }
 
-            if(exerciseCals != 0000) {
-                exerciseCalValTV.setText(String.valueOf(Math.round(exerciseCals)));
-            }
 
-            netCalValTV.setText(String.valueOf(Integer.parseInt(foodCalValTV.getText().toString())-Integer.parseInt(exerciseCalValTV.getText().toString())));
+
 
             avatarIV = (ImageView) rootView.findViewById(R.id.avatar);
             Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.unknown);
             RoundImage roundedImage = new RoundImage(bm);
             avatarIV.setImageDrawable(roundedImage);
 
-            ContextWrapper cw = new ContextWrapper(getActivity());
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            loadImageFromStorage(directory.getAbsolutePath());
+
 
             avatarIV.setOnClickListener(new View.OnClickListener()
             {
@@ -241,6 +232,36 @@ public class ProfileCollectionFragment extends Fragment {
             });
 
             return rootView;
+
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+            profile = db.getProfile();
+            goal = db.getGoal();
+            exerciseCals = db.getDaysExerciseCalories(julianDate);
+
+            ContextWrapper cw = new ContextWrapper(getActivity());
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            loadImageFromStorage(directory.getAbsolutePath());
+
+            if (profile.firstName.length() > 0) {
+                nameTV.setText(profile.firstName + " " + profile.surname);
+            }
+
+
+
+            if(goal.targetCals != 0000) {
+                goalCalValTV.setText(String.valueOf(Math.round(goal.targetCals)));
+            }
+
+            if(exerciseCals != 0000) {
+                exerciseCalValTV.setText(String.valueOf(Math.round(exerciseCals)));
+            }
+
+            netCalValTV.setText(String.valueOf(Integer.parseInt(foodCalValTV.getText().toString())-Integer.parseInt(exerciseCalValTV.getText().toString())));
 
         }
 
@@ -277,6 +298,11 @@ public class ProfileCollectionFragment extends Fragment {
 
 
         private static final String ARG_SECTION_NUMBER = "section_number";
+        ImageView goalImage;
+        DatabaseAdapter db;
+        DateConversion converter;
+        TextView startText;
+        TextView secondText;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -294,19 +320,19 @@ public class ProfileCollectionFragment extends Fragment {
         }
 
 
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.goal_fragment, container, false);
 
+            startText = (TextView) rootView.findViewById(R.id.goalStartText);
+            secondText = (TextView) rootView.findViewById(R.id.goalCurrentText);
 
-            ImageView goalImage = (ImageView) rootView.findViewById(R.id.exerciseImg);
-
-            goalImage.setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick(View v)
-                {
+            goalImage = (ImageView) rootView.findViewById(R.id.exerciseImg);
+            db = new DatabaseAdapter(getActivity());
+            converter = new DateConversion();
+            goalImage.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), GoalSetupActivity.class);
                     startActivity(intent);
 
@@ -315,6 +341,42 @@ public class ProfileCollectionFragment extends Fragment {
             });
 
             return rootView;
+
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+            GoalObject goal = db.getGoal();
+
+            String durationHolder= "";
+            String rateHolder=".";
+            String typeHolder="";
+
+            if (goal.type.equals("Maintain my weight")) {
+                goalImage.setImageResource(R.drawable.maintenance);
+            } else if (goal.type.equals("Gain weight")) {
+                goalImage.setImageResource(R.drawable.dumbells);
+            } else {
+                goalImage.setImageResource(R.drawable.runner);
+            }
+
+            if(goal.duration > 0) {
+                durationHolder = goal.duration + " months";
+            } else {
+                durationHolder = "for the foreseeable future";
+            }
+            if(goal.rate != 0.0) {
+                rateHolder = " at a rate of " + goal.rate + " lb's per week.";
+            }
+            startText.setText("Your goal is to "+ goal.type.toLowerCase()+" for a total of "+durationHolder+rateHolder);
+
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            String startDate = df.format(converter.julianToDate(goal.startDate));
+            String endDate = df.format(converter.julianToDate(goal.endDate));
+
+            secondText.setText("This goal was started on "+startDate+" and is set to finish on "+endDate+".");
 
         }
     }
